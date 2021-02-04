@@ -4,9 +4,54 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>DogBook</title>
 </head>
 <body>
+  <main>
+    <section class="login-page">
+      <img src="./image/wave.png" alt="wave" class="wave">
+      <div class="container">
+        <div class="img">
+          <img src="./image/dog-transparent.png" alt="perro">
+        </div>
+        <div class= "login-content">
+          <form action="index-html">
+            <img src="./image/avatar.png" alt="avatar" class="avatar">
+            <h2>¡Bienvenid@s!</h2>
+            <div class="input-div one focus">
+              <div class="i">
+                <i class="fas fa-dog"></i>
+              </div>
+              <div>
+                <h5>Nombre de usuario</h5>
+                <input type="text" class="input">
+              </div>
+            </div>
+            <div class="input-div two">
+              <div class="i">
+                <i class="fas fa-lock"></i>
+              </div>
+              <div>
+                <h5>Contraseña</h5>
+                <input type="password" class="input">
+              </div>
+            </div>
+            <a href="#">Olvidó la contraseña?</a>
+            <input type="submit" class="btn" value="Entrar">
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
   <script type="module" src="main.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-firestore.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<!--<script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-analytics.js"></script>-->
 </body>
 </html>

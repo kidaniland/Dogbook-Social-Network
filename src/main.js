@@ -1,25 +1,34 @@
-// Este es el punto de entrada de tu aplicacion
-
 import { myFunction } from './lib/index.js';
-
 myFunction();
 
-const inputs = document.querySelectorAll('.input');
-
-function focusFunction(){
-    let parent = this.parentNode.parentNode;
-    parent.classList.add('focus');
-}
-
-function blurFunction(){
-    let parent = this.parentNode.parentNode;
-    if(this.value === ""){
-        parent.classList.remove('focus');
+const init = () => {
+    document.getElementById('root').innerHTML = menu();
+    window.addEventListener('load', changeroute(window.location.hash));
+  
+    // reconoce un cambio en el hash y le pasa ese nuevo hash a changeRouter
+    if ('onhashchange' in window) {
+      window.onhashchange = () => {
+        console.log('en onhashchange', window.location.hash);
+        document.getElementById('root1').innerHTML = '';
+        changeroute(window.location.hash);
+      };
     }
+  };
+  
+  window.addEventListener('load', init());
+
+  //otro
+  const init = () => {
+    document.getElementById('containers').innerHTML = login();
+    
+    changeRoute(window.location.hash);
+
+    window.addEventListener('locationchange', () => {
+        changeRoute(window.location.hash);
+    }); 
+
+    window.addEventListener('popstate', () => {
+        window.dispatchEvent(new Event('locationchange'))
+    });
 }
-
-inputs.forEach(input => {
-    input.addEventListener('focus', focusFunction); 
-    input.addEventListener('blur', blurFunction); 
-
-});
+window.addEventListener('load', init);

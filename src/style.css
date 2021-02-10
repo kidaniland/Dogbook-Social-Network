@@ -39,7 +39,6 @@ body{
 .img img{
     width: 50rem;
 }
-
 form{
     width: 36rem;
 }
@@ -108,7 +107,6 @@ form{
 	top: -0.5rem;
 	font-size: 1.5rem;
 }
-
 .input-div.focus > .i > i{
 	color: #38d39f;
 }

@@ -1,4 +1,4 @@
-//Inputs del LOGIN
+//Input del LOGIN
 const validatorLogin = (emailValue, passwordValue) => {
     if (emailValue.trim() === '' || passwordValue.trim() === '') {
         return true;
@@ -8,10 +8,11 @@ const validatorLogin = (emailValue, passwordValue) => {
     }
 };
 
-//Inputs del REGISTRO
-const validatorRegisterDog = (
-    nameD,
-    breedD,
+//Input del REGISTRO
+/*const validatorRegister = (
+    userValue,
+    nameValue,
+    breedDValue,
     sexD,
     birthD,
     colorD
@@ -28,40 +29,9 @@ const validatorRegisterDog = (
     else {
         return true;
     }
-};
-
-const validatorRegisterHuman = (
-    emailRegister,
-    passwordRegister,
-    nameF,
-    nameL,
-    sex,
-    birth,
-    country,
-    emailRegisterValid,
-    passwordRegisterValid) => {
-        if (
-            emailRegisterValue === '' ||
-            passwordRegisterValue === '' ||
-            user === '' ||
-            nameF === '' ||
-            nameL === '' ||
-            sex === '' ||
-            birth === '' ||
-            country === ''
-        ) {
-            return true;
-        }
-        if (emailRegisterValid && passwordRegisterValid) {
-            return false;
-        }
-        else {
-            return true;
-        }
-};
+};*/
 
 export {
     validatorLogin,
-    validatorRegisterDog,
-    validatorRegisterHuman
+    //validatorRegister
 };

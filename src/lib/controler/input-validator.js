@@ -8,29 +8,6 @@ const validatorLogin = (emailValue, passwordValue) => {
     }
 };
 
-//Input del REGISTRO
-/*const validatorRegister = (
-    userValue,
-    nameValue,
-    breedDValue,
-    sexD,
-    birthD,
-    colorD
-) => {
-    if (
-        nameD === '' ||
-        breedD === '' ||
-        sexD === '' ||
-        birthD === '' ||
-        colorD === ''
-    ) {
-        return true;
-    }
-    else {
-        return true;
-    }
-};*/
-
 export {
     validatorLogin,
     //validatorRegister

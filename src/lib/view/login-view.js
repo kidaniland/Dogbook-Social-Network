@@ -45,6 +45,8 @@ const loginView = () => {
         </div>
         </div>
     `;
+
+    //Funciones estéticas de login-view
     const loginElement = document.createElement('section');
     loginElement.setAttribute('class', 'login-page');
     loginElement.innerHTML = loginContent;

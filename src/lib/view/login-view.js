@@ -1,5 +1,7 @@
 /*HTML DE LA VISTA LOGIN*/
 
+import { registerView } from "./register-view.js";
+
 const loginView = () => {
     const loginContent = `
         <img src="./image/wave.png" alt="wave" class="wave">
@@ -12,7 +14,7 @@ const loginView = () => {
             
             <!--grupo bienvenida-->
                 <img src="./image/avatar.png" alt="avatar" class="avatar">
-                <h2>¡Conectate a Dogbook!</h2>
+                <h2>Dogbook</h2>
 
             <!--grupo usuario-->
                 <div class="input-div one">
@@ -21,7 +23,7 @@ const loginView = () => {
                     </div>
                     <div>
                             <h5>Nombre de usuario</h5>
-                            <input type="text" class="input" id="email">
+                            <input type="text" class="input" id="user">
                     </div>
                 </div>
 
@@ -37,24 +39,50 @@ const loginView = () => {
                 </div>
 
             <!--al registro-->
-                <a href="#">Registrate</a>
+                <a href="#/registro" id="registro">Registrar usuario</a>
 
             <!--btn entrar-->
-                <button type="submit" class="login-btn" value="Entrar" id="LoginBtn">
+                <button type="submit" class="login-btn" value="Entrar" id="loginBtn">
             </form>
         </div>
         </div>
     `;
 
-    //Funciones estéticas de login-view
+    //ubicando elementos de login-view
     const loginElement = document.createElement('section');
-    loginElement.setAttribute('class', 'login-page');
+    loginElement.setAttribute('class', 'login-view');
     loginElement.innerHTML = loginContent;
 
     const inputs = loginElement.querySelectorAll('.input');
     console.log(">>>>>>>", inputs);
 
-    //Funciones focus de los input -PAG LOGIN-
+    //evento del boton entrar
+    const enterSite = loginElement.querySelector('#loginBtn');
+    enterSite.addEventListener('click', () => {
+        const user = document.querySelector('#user').value;
+        const password = document.querySelector('#password').value;
+        validatorLogin(user, password);
+    });
+
+    //hacia la vista registo
+   /* const HrefRegister = loginElement.querySelector('#registro');
+    HrefRegister.addEventListener('click', () => {
+        console.log("AKIIIIIII");
+        window.location = "#/registro";
+    });*/
+
+
+    //funcion para q los inputs no esten vacios
+    const validatorLogin = (userValue, passwordValue) => {
+        if (userValue.trim() === '' || passwordValue.trim() === '') {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    //Funciones estéticas de los input -PAG LOGIN-
     const focusFunction = (e) => {
         //console.log("THIS>>", this, e.target.parentNode.parentNode) para llegar hasta el div padre;
         let parent = e.target.parentNode.parentNode;
@@ -73,7 +101,7 @@ const loginView = () => {
         input.addEventListener('blur', blurFunction); 
 
     });
-
+    
     return loginElement
 } 
     

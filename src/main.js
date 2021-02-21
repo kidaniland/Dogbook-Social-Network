@@ -1,12 +1,10 @@
-import { loginView } from './lib/view/login-view.js';
-import { hashCondition } from './lib/route.js';
+import { hashCondition } from './lib/router.js';
 
-const initial = () => {
-  //console.log(">>", loginView);
-  document.getElementById('containers').appendChild(loginView());
-  window.addEventListener('locationchange', () => {
-    hashCondition(window.location.hash);
-  });
-}
-window.addEventListener('load', initial); //sin los parentesis porq eso significaría invacación inmediata.
-
+window.addEventListener('hashchange', () => {
+  console.log('cambio --Z>>>', window.location.hash)
+  hashCondition(window.location.hash);
+});
+window.addEventListener('load', () => {
+  console.log('cargo --Z>>>')
+  hashCondition(window.location.hash);
+});

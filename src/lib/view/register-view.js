@@ -1,3 +1,6 @@
+import { validateForm } from '../view/input-validator.js';
+
+
 const registerView = () => {
     const registerContent = `
     <div class ="user-register">
@@ -32,11 +35,11 @@ const registerView = () => {
                 <label for="dog-gender" class="formulario--label">Sexo</label>
                 <div class="formulario--grupo-input">
                 <label for="">
-                    <input type="checkbox" name="dogGender" id="genderMale" class="dog-gender-male" value="M">
+                    <input type="checkbox" name="dogGender" id="genderMale" class="dog-gender" value="M">
                     <span class="chekbox-gender">Macho</span>
-                    <input type="checkbox" name="dogGender" id="genderFem" class="dog-gender-fem" value="F">
+                    <input type="checkbox" name="dogGender" id="genderFem" class="dog-gender" value="F">
                     <span class="chekbox-gender">Hembra</span>
-                    <input type="checkbox" name="dogGender" id="genderNone" class="dog-gender-none" value="D">
+                    <input type="checkbox" name="dogGender" id="genderNone" class="dog-gender" value="D">
                     <span class="chekbox-gender">Desconocido</span>
                 </label>
                 </div>
@@ -48,9 +51,9 @@ const registerView = () => {
                 <div class="formulario--grupo-input">
                     <select name="years-old" id="dogYearsOld" data-placeholder="Meses/años"></select>
                     <label for="radio-inline">
-                        <input type="checkbox" name="dog-birth" id="dogYear" class="dog-edad" value="Y">
+                        <input type="checkbox" name="dog-birth" id="dogYear" class="dog-birth" value="Y">
                         <span class="chekbox-birth">Años</span>
-                        <input type="checkbox" name="dog-birth" id="dog-month" class="dog-edad" value="Mth">
+                        <input type="checkbox" name="dog-birth" id="dog-month" class="dog-birth" value="Mth">
                         <span class="chekbox-birth">Meses</span>
                     </label>
                 </div>
@@ -136,50 +139,51 @@ const registerView = () => {
     registerElement.innerHTML = registerContent;
 
     const formRegister = registerElement.querySelector('#formulario');
-    const inputsRegister = registerElement.querySelectorAll('#formulario input');
+    const inputsRegister = registerElement.querySelectorAll('.formulario--input');
 
     //por cada input del registro...
     inputsRegister.forEach((input) => {
-        console.log("ESTO LLEGO A IMPUT>>> ", input);
+        //console.log("ESTO LLEGO A IMPUT>>> ", input);
         input.addEventListener('keyup', validateForm);
         input.addEventListener('blur', validateForm);
     });
 
     //evento
     formRegister.addEventListener('submit', (e) =>{
-        e.preventDefault //eliminar al final sino no enviará nada
+        //e.preventDefault //eliminar al final sino no enviará nada
       
-        const gender = document.getElementById('dog-gender');
-        const birth = document.getElementById('dog-birth');
-        const terminos = document.getElementById('terminos');
+        const gender = registerElement.querySelector('.dog-gender');
+        const birth = registerElement.querySelector('.dog-birth');
+        const terminos = registerElement.querySelector('#terminos');
       
-          if(campos.usuario && 
+        if(campos.usuario && 
             campos.nombre && 
             campos.password && 
             campos.correo && 
             campos.raza && 
             terminos.checked && 
-            dog-gender.checked && 
-            dog-birth.checked){
+            gender.checked && 
+            birth.checked) {
           //reinicio todos los campos del formulario
-              formulario.reset();
+            formulario.reset();
       
           //activamos el mensajito de exito
-              document.getElementById('formulario--mensaje-exito').classList.add('formulario--mensaje-exito-activo');
+            registerElement.querySelector('#formulario--mensaje-exito').classList.add('formulario--mensaje-exito-activo');
       
           //para que se elimine en unos 5 segundos
-              setTimeout(() => {
-                  document.getElementById('formulario--mensaje-exito').classList.remove('formulario--mensaje-exito-activo');
-              }, 5000);
+            setTimeout(() => {
+                registerElement.querySelector('#formulario--mensaje-exito').classList.remove('formulario--mensaje-exito-activo');
+            }, 5000);
+
           //por cada icono remover la clase correcto
-              document.querySelectorAll('.formulario--grupo-correcto').forEach((icono) => {
-                  icono.classList.remove('formulario--grupo-correcto');
-              });
-          } 
+            registerElement.querySelectorAll('.formulario--grupo-correcto').forEach((icono) => {
+                icono.classList.remove('formulario--grupo-correcto');
+            });
+        } 
         else {
-              document.getElementById('formulario--mensaje').classList.add('formulario--mensaje-activo');
-          }
-        //desde aqui enviar a firebase
+            registerElement.getElementById('formulario--mensaje').classList.add('formulario--mensaje-activo');
+        }
+        //OJOOOOOOOOOOOOOO desde aqui enviar a firebase
       });
 
 
@@ -197,75 +201,6 @@ const registerView = () => {
         nombre: false,
         password: false,
         email: false
-    }
-
-    const validateForm = (e) => {
-        switch (e.target.name) {
-            case "usuario":
-                validateRecordField(regularExpression.usuario, e.target, 'usuario');
-            break;
-            case "raza":
-                validateRecordField(regularExpression.nombre, e.target, 'raza');
-            break;
-            case "nombre":
-                validateRecordField(regularExpression.nombre, e.target, 'nombre');
-            break;
-            case "password":
-                validateRecordField(regularExpression.password, e.target, 'password');
-                validatePassword2();
-            break;
-            case "password2":
-                validatePassword2();
-            break;
-            case "email":
-                validateRecordField(regularExpression.correo, e.target, 'email');
-            break;
-        }
-    }
-
-    const validateRecordField = (expresion, input, campo) => {
-        if(expresion.test(input.value)){
-          document.getElementById(`grupo--${campo}`).classList.remove('formulario--grupo-incorrecto');
-          document.getElementById(`grupo--${campo}`).classList.add('formulario--grupo-correcto');
-          document.querySelector(`#grupo--${campo} i`).classList.remove('fa-times-circle');
-          document.querySelector(`#grupo--${campo} i`).classList.add('fa-check-circle');
-          document.querySelector(`#grupo--${campo} .formulario--input-error`).classList.remove('formulario--input-error-activo');
-          campos[campo] = true;
-        }
-        else{
-          document.getElementById(`grupo--${campo}`).classList.add('formulario--grupo-incorrecto');
-          document.getElementById(`grupo--${campo}`).classList.remove('formulario--grupo-correcto');
-          document.querySelector(`#grupo--${campo} i`).classList.add('fa-times-circle');
-          document.querySelector(`#grupo--${campo} i`).classList.remove('fa-check-circle');
-          document.querySelector(`#grupo--${campo} .formulario--input-error`).classList.add('formulario--input-error-activo');
-          campos[campo] = false;
-        }
-    }
-
-    const validatePassword2 = () => {
-        const inputPassword1 = document.getElementById('password');
-        const inputPassword2 = document.getElementById('password2');
-      
-        if(inputPassword1.value !== inputPassword2.value){
-            document.getElementById(`grupo--password2`).classList.add('formulario--grupo-incorrecto');
-            document.getElementById(`grupo--password2`).classList.remove('formulario--grupo-correcto');
-          //icono
-            document.querySelector(`#grupo--password2 i`).classList.add('fa-times-circle');
-            document.querySelector(`#grupo--password2 i`).classList.remove('fa-check-circle');
-      
-            document.querySelector(`#grupo--password2 .formulario--input-error`).classList.add('formulario--input-error-activo');
-            campos['password'] = false;
-        } 
-        else {
-            document.getElementById(`grupo--password2`).classList.remove('formulario--grupo-incorrecto');
-            document.getElementById(`grupo--password2`).classList.add('formulario--grupo-correcto');
-      
-            document.querySelector(`#grupo--password2 i`).classList.remove('fa-times-circle');
-            document.querySelector(`#grupo--password2 i`).classList.add('fa-check-circle');
-      
-            document.querySelector(`#grupo--password2 .formulario--input-error`).classList.remove('formulario--input-error-activo');
-            campos['password'] = true;
-        }
     }
 
     return registerElement

@@ -42,7 +42,7 @@ const loginView = () => {
                 <a href="#/registro" id="registro">Registrar usuario</a>
 
             <!--btn entrar-->
-                <button type="submit" class="login-btn" value="Entrar" id="loginBtn">
+                <button type="submit" class="login-btn" value="Entrar" id="loginBtn">Entrar</button>
             </form>
         </div>
         </div>

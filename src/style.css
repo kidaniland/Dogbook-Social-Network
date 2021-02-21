@@ -209,12 +209,12 @@ a:hover{
 .formulario {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px; /*espaciado entre cada elemento de la grid*/
+    gap: 2rem; /*espaciado entre cada elemento de la grid*/
   }
   .formulario--label {
     display: block;
     font-weight: 700;
-    padding: 10px;
+    padding: 1rem;
     cursor: pointer;
   }
   .formulario--grupo-input {
@@ -223,20 +223,20 @@ a:hover{
   .formulario--input {
     width: 100%;
     background: #fff;
-    border: 3px solid transparent;
-    border-radius: 3px;
-    height: 45px;
-    line-height: 45px;
-    padding: 0px 40px 0px 10px;
+    border: 0.3rem solid transparent;
+    border-radius: 0.3rem;
+    height: 4.5rem;
+    line-height: 4.5rem;
+    padding: 0rem 4rem 0rem 1rem;
     transition: .3s ease all;
   }
   .formulario--input:focus {
-    border: 3px solid #0075ff;
+    border: 0.3rem solid #0075ff;
     outline: none;
-    box-shadow: 3px 0px 30px rgba(163, 163, 163, 0.4);
+    box-shadow: 0.3rem 0rem 0.3rem rgba(163, 163, 163, 0.4);
   }
   .formulario--input-error {
-    font-size: 12px;
+    font-size: 1.2rem;
     margin-bottom: 0;
     display: none;
   }
@@ -246,14 +246,14 @@ a:hover{
 /*el icono*/
   .formulario--validacion-estado {
     position: absolute;
-    right: 10px;
-    bottom: 15px;
+    right: 1rem;
+    bottom: 1.5rem;
     z-index: 100;
     opacity: 0;
-    font-size: 16px;
+    font-size: 1.6rem;
   } 
   .formulario--checkbox {
-    margin-right: 10px;
+    margin-right: 1rem;
   }
   .formulario--grupo-terminos,
   .formulario--mensaje,
@@ -261,11 +261,11 @@ a:hover{
     grid-column: span 2; /*con esto hacemos que el elemento abarque 2 colum*/
   } 
   .formulario--mensaje {
-    height: 45px;
-    line-height: 45px;
+    height: 4.5rem;
+    line-height: 4.5rem;
     background-color: #f66060;
-    padding: 0 15px;
-    border-radius: 3px;
+    padding: 0 1.5rem;
+    border-radius: 0.3rem;
     display: none;
   }
   .formulario--mensaje-activo {
@@ -280,22 +280,27 @@ a:hover{
     align-content: center;
   }
   .formulario--btn {
-    height: 45px;
-    line-height: 45px;
-    width: 30%;
-    background: #000;
-    color: #fff;
-    font-weight: bold;
+    display: block;
+    width: 100%;
+    height: 5rem;
+    border-radius: 2.5rem;
+    outline: none;
     border: none;
-    border-radius: 3px;
+    background-image: linear-gradient(to right, #32be8f, #38d39f, #32be8f);
+    background-size: 200%;
+    font-size: 2rem;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    margin: 1rem 0;
     cursor: pointer;
-    transition: .1s ease all;
+    transition: .5s;
   }
   .formulario--btn:hover {
-    box-shadow: 3px 0px 30px regba(163, 163, 163 1);
+    background-position: right;
   }  
   .formulario--mensaje-exito {
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #119200;
     display: none;
   }
@@ -314,14 +319,14 @@ a:hover{
   .formulario--grupo-incorrecto .formulario--validacion-estado{
     color: #bb2929;
     position: absolute;
-    right: 10px;
-    bottom: 15px;
+    right: 1rem;
+    bottom: 10.5rem;
     z-index: 100;
-    font-size: 16px;
+    font-size: 1.6rem;
     opacity: 1;
   }  
   .formulario--grupo-incorrecto .formulario--input{
-    border: 3px solid #bb2929;
+    border: 0.3rem solid #bb2929;
   }
   
   /*---------Mediaqueries REGISTRO----------*/

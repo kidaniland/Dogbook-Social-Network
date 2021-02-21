@@ -1,9 +1,9 @@
-import { validateForm } from '../view/input-validator.js';
+//import { validateForm } from '../view/input-validator.js';
 
 
 const registerView = () => {
     const registerContent = `
-    <div class ="user-register">
+    
         <form action="" class="formulario" id="formulario">
     
         <!--Grupo usuario-->
@@ -130,7 +130,6 @@ const registerView = () => {
               </p>
             </div>
         </form>
-    </div>
     `;
 
     //elementos
@@ -140,13 +139,6 @@ const registerView = () => {
 
     const formRegister = registerElement.querySelector('#formulario');
     const inputsRegister = registerElement.querySelectorAll('.formulario--input');
-
-    //por cada input del registro...
-    inputsRegister.forEach((input) => {
-        //console.log("ESTO LLEGO A IMPUT>>> ", input);
-        input.addEventListener('keyup', validateForm);
-        input.addEventListener('blur', validateForm);
-    });
 
     //evento
     formRegister.addEventListener('submit', (e) =>{
@@ -187,21 +179,96 @@ const registerView = () => {
       });
 
 
+    const validateForm = (e) => {
+        switch (e.target.name) {
+            case "usuario":
+                validateRecordField(regularExpression.usuario, e.target, 'usuario');
+            break;
+            case "raza":
+                validateRecordField(regularExpression.nombre, e.target, 'raza');
+            break;
+            case "nombre":
+                validateRecordField(regularExpression.nombre, e.target, 'nombre');
+            break;
+            case "password":
+                validateRecordField(regularExpression.password, e.target, 'password');
+                validatePassword2();
+            break;
+            case "password2":
+                validatePassword2();
+            break;
+            case "email":
+                validateRecordField(regularExpression.correo, e.target, 'email');
+            break;
+        }
+    }
+
+    //por cada input del registro...
+    inputsRegister.forEach((input) => {
+        //console.log("ESTO LLEGO A IMPUT>>> ", input);
+        input.addEventListener('keyup', validateForm);
+        input.addEventListener('blur', validateForm);
+    });
+    
+    const validateRecordField = (expresion, input, campo) => {
+        if(expresion.test(input.value)){
+          registerElement.querySelector(`#grupo--${campo}`).classList.remove('formulario--grupo-incorrecto');
+          registerElement.querySelector(`#grupo--${campo}`).classList.add('formulario--grupo-correcto');
+          registerElement.querySelector(`#grupo--${campo} i`).classList.remove('fa-times-circle');
+          registerElement.querySelector(`#grupo--${campo} i`).classList.add('fa-check-circle');
+          registerElement.querySelector(`#grupo--${campo} .formulario--input-error`).classList.remove('formulario--input-error-activo');
+          campos[campo] = true;
+        }
+        else{
+          registerElement.querySelector(`#grupo--${campo}`).classList.add('formulario--grupo-incorrecto');
+          registerElement.querySelector(`#grupo--${campo}`).classList.remove('formulario--grupo-correcto');
+          registerElement.querySelector(`#grupo--${campo} i`).classList.add('fa-times-circle');
+          registerElement.querySelector(`#grupo--${campo} i`).classList.remove('fa-check-circle');
+          registerElement.querySelector(`#grupo--${campo} .formulario--input-error`).classList.add('formulario--input-error-activo');
+          campos[campo] = false;
+        }
+    }
+    
+    const validatePassword2 = () => {
+        const inputPassword1 = registerElement.querySelector('#password');
+        const inputPassword2 = registerElement.querySelector('#password2');
+      
+        if(inputPassword1.value !== inputPassword2.value){
+            registerElement.querySelector(`#grupo--password2`).classList.add('formulario--grupo-incorrecto');
+            registerElement.querySelector(`#grupo--password2`).classList.remove('formulario--grupo-correcto');
+          //icono
+            registerElement.querySelector(`#grupo--password2 i`).classList.add('fa-times-circle');
+            registerElement.querySelector(`#grupo--password2 i`).classList.remove('fa-check-circle');
+      
+            registerElement.querySelector(`#grupo--password2 .formulario--input-error`).classList.add('formulario--input-error-activo');
+            campos['password'] = false;
+        } 
+        else {
+            registerElement.querySelector(`#grupo--password2`).classList.remove('formulario--grupo-incorrecto');
+            registerElement.querySelector(`#grupo--password2`).classList.add('formulario--grupo-correcto');
+      
+            registerElement.querySelector(`#grupo--password2 i`).classList.remove('fa-times-circle');
+            registerElement.querySelector(`#grupo--password2 i`).classList.add('fa-check-circle');
+      
+            registerElement.querySelector(`#grupo--password2 .formulario--input-error`).classList.remove('formulario--input-error-activo');
+            campos['password'] = true;
+        }
+    }
+    
     const regularExpression = {
         usuario: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
         nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
         password: /^.{4,12}$/, // 4 a 12 digitos.
         email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
     };
-
-    //representan si un campo está valido o no 
+    
     const campos = {
         usuario: false,
         raza: false,
         nombre: false,
         password: false,
         email: false
-    }
+    };
 
     return registerElement
 } 

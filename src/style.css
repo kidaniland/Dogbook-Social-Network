@@ -10,12 +10,6 @@ body{
     font-family: 'poppins', sans-serif;
     background-color: #e5e5e5;
 }
-main {
-    /*max-width: 80rem;
-    width: 90%;*/
-    margin: auto;
-    padding: 4rem;
-}
 
 /*----------VISTA LOGIN---------------*/
 .wave{
@@ -202,6 +196,13 @@ a:hover{
 }
 
 /*----------VISTA REGISTRO------------*/
+.register-view{
+  background-color: #e5e5e5;
+  max-width: 80rem;
+  width: 90%;
+  margin: auto;
+  padding: 4rem;
+}
 .formulario {
     display: grid;
     grid-template-columns: 1fr 1fr;

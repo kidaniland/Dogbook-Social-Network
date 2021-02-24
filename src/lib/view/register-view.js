@@ -1,9 +1,17 @@
-//import { validateForm } from '../view/input-validator.js';
-
+import { createUser } from '../firebase/firebase-config.js';
+//import { registerUser } from '../firebase/firestore.js';
 
 const registerView = () => {
     const registerContent = `
-    
+
+       <div class="registro-bienvenida">
+            <h4>Bienvenido a Dogbook</h4>
+                <div class="registro-bienvenida-texto">
+                    Publica, comparte y conecta con otros amantes de los perros, se parte de este parque digital.
+                </div>
+            <span>¡Registrate ahora!</span>
+        </div>
+
         <form action="" class="formulario" id="formulario">
     
         <!--Grupo usuario-->
@@ -124,7 +132,7 @@ const registerView = () => {
     
             <!--button-->
             <div class="formulario--grupo formulario--grupo-btn-enviar">
-              <button type="submit" class="formulario--btn" id="RegisterBtn">Enviar</button>
+              <button type="submit" class="formulario--btn" id="RegisterBtn">Registrarse</button>
               <p class="formulario--mensaje-exito" id="formulario--mensaje-exito">
                 ¡El formulario se ha enviado exitosamente!
               </p>
@@ -133,22 +141,31 @@ const registerView = () => {
     `;
 
     //elementos
-    const registerElement = document.createElement('section');
-    registerElement.setAttribute('class', 'register-view');
+    const registerElement = document.createElement('div');
+    registerElement.setAttribute('class', 'register-modal');
     registerElement.innerHTML = registerContent;
 
     const formRegister = registerElement.querySelector('#formulario');
     const inputsRegister = registerElement.querySelectorAll('.formulario--input');
 
-    //evento
-    formRegister.addEventListener('submit', (e) =>{
-        //e.preventDefault //eliminar al final sino no enviará nada
-      
-        const gender = registerElement.querySelector('.dog-gender');
+    //valiables de cada elemento del formulario de registro
+    /*const gender = registerElement.querySelector('.dog-gender');
         const birth = registerElement.querySelector('.dog-birth');
-        const terminos = registerElement.querySelector('#terminos');
+        const terminos = registerElement.querySelector('#terminos');*/
+    
+    //evento SUBMIT
+    formRegister.addEventListener('submit', (e) => {
+        e.preventDefault //eliminar al final...
+        const password = registerElement.querySelector('#password').value;
+        const email = registerElement.querySelector('#email').value;
+        console.log("YUJUUU-->", email, password);
+        createUser(email, password); //LISTOOOOOO
+        //registerUser({user: user.value}) //le paso de parámetro un obj con todo lo del input esta funcion la importo desde firestore   
+    });
       
-        if(campos.usuario && 
+        //ESTO NO ESTÁ OCURRIENDO
+
+        /*if(campos.usuario && 
             campos.nombre && 
             campos.password && 
             campos.correo && 
@@ -156,10 +173,8 @@ const registerView = () => {
             terminos.checked && 
             gender.checked && 
             birth.checked) {
-          //reinicio todos los campos del formulario
-            formulario.reset();
-      
-          //activamos el mensajito de exito
+          
+            //activamos el mensajito de exito
             registerElement.querySelector('#formulario--mensaje-exito').classList.add('formulario--mensaje-exito-activo');
       
           //para que se elimine en unos 5 segundos
@@ -174,11 +189,10 @@ const registerView = () => {
         } 
         else {
             registerElement.getElementById('formulario--mensaje').classList.add('formulario--mensaje-activo');
-        }
-        //OJOOOOOOOOOOOOOO desde aqui enviar a firebase
-      });
+        }*/
 
 
+      /*
     const validateForm = (e) => {
         switch (e.target.name) {
             case "usuario":
@@ -269,7 +283,7 @@ const registerView = () => {
         password: false,
         email: false
     };
-
+*/
     return registerElement
 } 
 

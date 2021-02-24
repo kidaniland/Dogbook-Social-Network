@@ -1,6 +1,4 @@
-/*HTML DE LA VISTA LOGIN*/
-
-import { registerView } from "./register-view.js";
+import { singIn } from '../firebase/firebase-config.js';
 
 const loginView = () => {
     const loginContent = `
@@ -10,7 +8,7 @@ const loginView = () => {
             <img src="./image/dog-transparent.png" alt="perro">
         </div>
         <div class= "login-content">
-            <form action="index-html" class="formulario-login" id="formularioLogin">
+            <form class="formulario-login" id="formularioLogin">
             
             <!--grupo bienvenida-->
                 <img src="./image/avatar.png" alt="avatar" class="avatar">
@@ -22,8 +20,8 @@ const loginView = () => {
                             <i class="fas fa-dog"></i>
                     </div>
                     <div>
-                            <h5>Nombre de usuario</h5>
-                            <input type="text" class="input" id="user">
+                            <h5>Email de usuario</h5>
+                            <input type="text" class="input" id="userEmail">
                     </div>
                 </div>
 
@@ -34,15 +32,15 @@ const loginView = () => {
                     </div>
                     <div>
                             <h5>Contraseña</h5>
-                            <input type="password" class="input" id="password">
+                            <input type="password" class="input" id="userPassword">
                     </div>
                 </div>
 
             <!--al registro-->
-                <a href="#/registro" id="registro">Registrar usuario</a>
+                <a href="#/registro" id="registro">Crea una cuenta</a>
 
             <!--btn entrar-->
-                <button type="submit" class="login-btn" value="Entrar" id="loginBtn">Entrar</button>
+                <button type="button" class="login-btn" value="Entrar" id="loginBtn">Entrar</button>
             </form>
         </div>
         </div>
@@ -54,23 +52,18 @@ const loginView = () => {
     loginElement.innerHTML = loginContent;
 
     const inputs = loginElement.querySelectorAll('.input');
-    console.log(">>>>>>>", inputs);
+    /////console.log(">>>>>>>", inputs);
 
-    //evento del boton entrar
-    const enterSite = loginElement.querySelector('#loginBtn');
-    enterSite.addEventListener('click', () => {
-        const user = document.querySelector('#user').value;
-        const password = document.querySelector('#password').value;
-        validatorLogin(user, password);
-    });
-
-    //hacia la vista registo
-   /* const HrefRegister = loginElement.querySelector('#registro');
-    HrefRegister.addEventListener('click', () => {
-        console.log("AKIIIIIII");
-        window.location = "#/registro";
-    });*/
-
+    const loginBtn = loginElement.querySelector('#loginBtn');
+    loginBtn.addEventListener('click', (e) => {
+        e.preventDefault
+        const loginEmail = document.querySelector('#userEmail').value;
+        const loginPassword = document.querySelector('#userPassword').value;
+        //console.log("ENVIAMOS>>>", loginEmail, loginPassword);
+        
+        validatorLogin(loginEmail, loginPassword);
+        singIn(loginEmail, loginPassword); 
+    })
 
     //funcion para q los inputs no esten vacios
     const validatorLogin = (userValue, passwordValue) => {
@@ -81,6 +74,7 @@ const loginView = () => {
             return false;
         }
     }
+    
 
     //Funciones estéticas de los input -PAG LOGIN-
     const focusFunction = (e) => {

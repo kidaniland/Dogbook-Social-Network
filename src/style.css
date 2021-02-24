@@ -199,17 +199,41 @@ a:hover{
 }
 
 /*----------VISTA REGISTRO------------*/
-.register-view{
+.register-modal{
   background-color: #e5e5e5;
   max-width: 80rem;
-  width: 90%;
+  width: 90% !important;
   margin: auto;
   padding: 4rem;
 }
+.registro-bienvenida{
+  text-align: center;
+  width: 100%
+}
+.registro-bienvenida h4 {
+  color: #333;
+  font-size: 2.5em;
+  font-family: 'poppins', sans-serif;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 0.5em;
+}
+.registro-bienvenida .registro-bienvenida-texto {
+  margin-bottom: 1em;
+  font-size: 1.5em;
+}
+.registro-bienvenida span {
+  color: #32be8f;
+  font-size: 1.6em;
+  font-weight: bold;
+}
+
 .formulario {
     display: grid;
+    width: 100%;
     grid-template-columns: 1fr 1fr;
     gap: 2rem; /*espaciado entre cada elemento de la grid*/
+    font-size: 1.6rem;
   }
   .formulario--label {
     display: block;
@@ -231,7 +255,7 @@ a:hover{
     transition: .3s ease all;
   }
   .formulario--input:focus {
-    border: 0.3rem solid #0075ff;
+    border: 0.3rem solid #32be8f;
     outline: none;
     box-shadow: 0.3rem 0rem 0.3rem rgba(163, 163, 163, 0.4);
   }

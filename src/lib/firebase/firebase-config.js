@@ -1,4 +1,4 @@
-//import { pushState } from '../router.js';
+import { pushState } from '../router.js';
 
 //EVITAR dejar este archivo a la vista cuando se haga público el proyecto
 const firebaseConfig = {
@@ -22,12 +22,21 @@ const createUser = (email, password) => {
   auth
     .createUserWithEmailAndPassword(email, password)
     .then (userCredential => {
-      console.log("lo logramos"); 
-      //reinicio todos los campos del formulario
-      formulario.reset();
+      console.log("lo logramos");
+      //Enviamos por correlo la URL (durante la verificacion) para que llegue de nuevo a login-view
+      const config = {
+        url: 'http://localhost:5000/'
+      }
 
-      //cerrar formularios OJO esto de ultimo sino no le da tiempo al registro
-      //signOut()  
+      if (userCredential.user.emailVerified === false){
+          userCredential.user.sendEmailVerification(config)
+          //cierro sesión
+          signOut()
+      }
+      setTimeout(() => { 
+      //cerrar formulario
+      document.querySelector('.register-view').style.display = "none"
+      }, 4000); 
     })
     .catch(error => {
         console.error(error)
@@ -37,51 +46,42 @@ const createUser = (email, password) => {
 
 //Iniciar sesión
 const singIn = (email, password) => {
+  console.log("LLEGA-->", email, password);
   const auth = firebase.auth();
-console.log("---->", auth);
+  //console.log("---->", auth);
   auth
     .signInWithEmailAndPassword(email, password) //regresa una promise que podrá identf al usuario ya registrado
-    .then (userCredential => {
-      console.log("USUARIO INGRESADO :D"); 
-      //entrar al MURO
-       // pushState('#/muro')
-      //reinicio todos los campos del formulario
-       //formLogin.reset(); 
-  
+    .then (data => {
+      console.log("SE HA LOGEADO")
+      if(data.user.emailVerified === false){
+        localStorage.setItem('user', JSON.stringify(
+          {
+            name: data.user.displayName,
+            email: data.user.email,
+            photo: data.user.photoURL,
+            uid: data.user.uid,
+          }))
+          //por ultimos pasamos al muro
+          pushState('#/muro')
+      }
+      else{
+        Materialize.toast('Verifica tu correo electrónico antes de ingresar.')
+      } 
     })
     .catch(error => {
-        console.error(error)
+      console.error(error)
     })
 }
 
-//Si el usuario está autenticado, quiero mostrar los datos
-firebase
-  .auth()
-  .onAuthStateChanged(user => { //cada vez q se dispare obten user
-    if (user){
-      dataBase.collection('post')
-        .get()
-        .then((snapshot) => {
-          console.log('Muestra lo capturado-->', snapshot.docs)
-          setupPost(snapshot.docs)
-        })
-    }
-    else{
-      console.log('No está logueado>>>>')
-      setupPost([])
-
-    }
-  })
-
 //Cerrar sesión
 const signOut = () => {
-  firebase
-    .auth()
+  const auth = firebase.auth();
+  auth
     .signOut()
     .then( () => {
         localStorage.removeItem('user');
         pushState('#/');
-        console.log('Sign-out');
+        console.log('Sesión cerrada');
         console.log(user);
     })
     .catch(error => {

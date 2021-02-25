@@ -3,12 +3,14 @@ import { singIn } from '../firebase/firebase-config.js';
 const loginView = () => {
     const loginContent = `
         <img src="./image/wave.png" alt="wave" class="wave">
+
         <div class="container">
-        <div class="img">
-            <img src="./image/dog-transparent.png" alt="perro">
-        </div>
+            <div class="img">
+                <img src="./image/dog-transparent.png" alt="perro">
+            </div>
         <div class= "login-content">
-            <form class="formulario-login" id="formularioLogin">
+
+            <form action="" class="formulario-login" id="formularioLogin">
             
             <!--grupo bienvenida-->
                 <img src="./image/avatar.png" alt="avatar" class="avatar">
@@ -40,7 +42,7 @@ const loginView = () => {
                 <a href="#/registro" id="registro">Crea una cuenta</a>
 
             <!--btn entrar-->
-                <button type="button" class="login-btn" value="Entrar" id="loginBtn">Entrar</button>
+                <button type="submit" class="login-btn" value="Entrar" id="loginBtn">Entrar</button>
             </form>
         </div>
         </div>
@@ -54,6 +56,18 @@ const loginView = () => {
     const inputs = loginElement.querySelectorAll('.input');
     /////console.log(">>>>>>>", inputs);
 
+    const loginForm = loginElement.querySelector('#formularioLogin')
+    //evento
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault 
+        const loginEmail = document.querySelector('#userEmail').value;
+        const loginPassword = document.querySelector('#userPassword').value;
+        //console.log("ENVIAMOS>>>", loginEmail, loginPassword);
+        validatorLogin(loginEmail, loginPassword);
+        singIn(loginEmail, loginPassword); 
+    })
+
+    /*
     const loginBtn = loginElement.querySelector('#loginBtn');
     loginBtn.addEventListener('click', (e) => {
         e.preventDefault
@@ -64,6 +78,7 @@ const loginView = () => {
         validatorLogin(loginEmail, loginPassword);
         singIn(loginEmail, loginPassword); 
     })
+    */
 
     //funcion para q los inputs no esten vacios
     const validatorLogin = (userValue, passwordValue) => {

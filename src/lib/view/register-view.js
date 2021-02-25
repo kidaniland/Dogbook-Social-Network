@@ -1,5 +1,8 @@
 import { createUser } from '../firebase/firebase-config.js';
-//import { registerUser } from '../firebase/firestore.js';
+import { registerUser } from '../firebase/firestore.js';
+import { validatePassword2 } from '../validator/validate-input.js';
+import { validateRecordField } from '../validator/validate-input.js';
+
 
 const registerView = () => {
     const registerContent = `
@@ -33,7 +36,7 @@ const registerView = () => {
                     <input type="text" class="formulario--input" name="raza" id="raza" placeholder="Caniche">
                     <i class="formulario--validacion-estado fas fa-times-circle"></i>
                     <p class="formulario--input-error">
-                        Selecciona la raza a la que pertenece tu mascota.
+                        Escribe el nombre de la raza a la que pertenece tu mascota.
                     </p>
                 </div>
             </div>
@@ -42,32 +45,20 @@ const registerView = () => {
             <div class="formulario--grupo" id="grupo--sexo">
                 <label for="dog-gender" class="formulario--label">Sexo</label>
                 <div class="formulario--grupo-input">
-                <label for="">
-                    <input type="checkbox" name="dogGender" id="genderMale" class="dog-gender" value="M">
-                    <span class="chekbox-gender">Macho</span>
-                    <input type="checkbox" name="dogGender" id="genderFem" class="dog-gender" value="F">
-                    <span class="chekbox-gender">Hembra</span>
-                    <input type="checkbox" name="dogGender" id="genderNone" class="dog-gender" value="D">
-                    <span class="chekbox-gender">Desconocido</span>
-                </label>
+                    <select name="genderDog" id="genderDog">
+                    </select>
                 </div>
             </div>
     
         <!--Grupo nacimiento-->
             <div class="formulario--grupo" id="grupo--nacimiento">
-                <label for="nacimiento" class="formulario--label">Edad</label>
+                <label for="nacimiento" class="formulario--label">Nacimiento</label>
                 <div class="formulario--grupo-input">
-                    <select name="years-old" id="dogYearsOld" data-placeholder="Meses/años"></select>
-                    <label for="radio-inline">
-                        <input type="checkbox" name="dog-birth" id="dogYear" class="dog-birth" value="Y">
-                        <span class="chekbox-birth">Años</span>
-                        <input type="checkbox" name="dog-birth" id="dog-month" class="dog-birth" value="Mth">
-                        <span class="chekbox-birth">Meses</span>
-                    </label>
+                    <input type="date" id="bDayDog" placeholder="Fecha de nacimiento:" autocomplete="Fecha de nacimiento:">       
                 </div>
             </div>
     
-        <!--Grupo nombre humano-->
+        <!--Grupo nombre- humano-->
             <div class="formulario--grupo" id="grupo--nombre">
                 <label for="nombre" class="formulario--label">Nombre Humano</label>
                 <div class="formulario--grupo-input">
@@ -78,6 +69,18 @@ const registerView = () => {
                     </p>
                 </div>
             </div>
+
+        <!--Grupo País de origen- humano-->
+            <div class="formulario--grupo" id="grupo--nombre">
+                <label for="nombre" class="formulario--label">País</label>
+                <div class="formulario--grupo-input">
+                    <input type="text" class="formulario--input" name="pais" id="paisHumano" placeholder="Chile">
+                    <i class="formulario--validacion-estado fas fa-times-circle"></i>
+                    <p class="formulario--input-error">
+                        El nombre tiene que ser de 4 a 16 dígitos y solo puede contener números, letras y/o guión bajo.
+                    </p>
+                </div>
+            </div>    
         
         <!--Grupo contraseña-->
             <div class="formulario--grupo" id="grupo--password">
@@ -86,7 +89,7 @@ const registerView = () => {
                     <input type="password" class="formulario--input" name="password" id="password">
                     <i class="formulario--validacion-estado fas fa-times-circle"></i>
                     <p class="formulario--input-error">
-                        La contraseña debe tener de 4 a 12 dígitos.
+                        La contraseña debe tener de 6 a 12 dígitos.
                     </p>
                 </div>
             </div>
@@ -142,61 +145,58 @@ const registerView = () => {
 
     //elementos
     const registerElement = document.createElement('div');
-    registerElement.setAttribute('class', 'register-modal');
+    registerElement.setAttribute('class', 'register-view');
     registerElement.innerHTML = registerContent;
 
     const formRegister = registerElement.querySelector('#formulario');
     const inputsRegister = registerElement.querySelectorAll('.formulario--input');
 
-    //valiables de cada elemento del formulario de registro
-    /*const gender = registerElement.querySelector('.dog-gender');
-        const birth = registerElement.querySelector('.dog-birth');
-        const terminos = registerElement.querySelector('#terminos');*/
-    
-    //evento SUBMIT
-    formRegister.addEventListener('submit', (e) => {
-        e.preventDefault //eliminar al final...
-        const password = registerElement.querySelector('#password').value;
-        const email = registerElement.querySelector('#email').value;
-        console.log("YUJUUU-->", email, password);
-        createUser(email, password); //LISTOOOOOO
-        //registerUser({user: user.value}) //le paso de parámetro un obj con todo lo del input esta funcion la importo desde firestore   
-    });
-      
-        //ESTO NO ESTÁ OCURRIENDO
+    //variables por cada input
+    const userDog = registerElement.querySelector('#usuario');
+    const breedDog = registerElement.querySelector('#raza');
+    const selectGender = registerElement.querySelector('#genderDog');
+    const birth = registerElement.querySelector('#bDayDog');
+    const nameHuman = registerElement.querySelector('#nombre');
+    const country = registerElement.querySelector('#paisHumano');
+    const email = registerElement.querySelector('#email');
+    const inputPassword1 = registerElement.querySelector('#password');
+    const inputPassword2 = registerElement.querySelector('#password2');
+    const terminos = registerElement.querySelector('#terminos');
 
-        /*if(campos.usuario && 
-            campos.nombre && 
-            campos.password && 
-            campos.correo && 
-            campos.raza && 
-            terminos.checked && 
-            gender.checked && 
-            birth.checked) {
-          
-            //activamos el mensajito de exito
-            registerElement.querySelector('#formulario--mensaje-exito').classList.add('formulario--mensaje-exito-activo');
-      
-          //para que se elimine en unos 5 segundos
-            setTimeout(() => {
-                registerElement.querySelector('#formulario--mensaje-exito').classList.remove('formulario--mensaje-exito-activo');
-            }, 5000);
+    const regularExpression = {
+        nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
+        password: /^.{6,12}$/, // 6 a 12 digitos.
+        correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+    }
 
-          //por cada icono remover la clase correcto
-            registerElement.querySelectorAll('.formulario--grupo-correcto').forEach((icono) => {
-                icono.classList.remove('formulario--grupo-correcto');
-            });
-        } 
-        else {
-            registerElement.getElementById('formulario--mensaje').classList.add('formulario--mensaje-activo');
-        }*/
+    const campos = {
+        user: false,
+        breed: false,
+        nameH: false,
+        country: false,
+        email: false
+    }
 
+    //select género del perro
+    let fragment = document.createDocumentFragment();
+    const genderDog = ['Selecciona:', 'Macho', 'Hembra', 'Desconocido'];
+    for (const gender of genderDog){
+        const selectG = document.createElement('option');
+        selectG.setAttribute('value', gender.toLowerCase());
+        selectG.textContent = gender;
+        fragment.appendChild(selectG);
+    }
+    let gender;
+    selectGender.appendChild(fragment);
+    selectGender.addEventListener('change', () => {
+        gender = selectGender.value;
+        console.log("género del perro--> ", gender);
+    })
 
-      /*
     const validateForm = (e) => {
         switch (e.target.name) {
             case "usuario":
-                validateRecordField(regularExpression.usuario, e.target, 'usuario');
+                validateRecordField(regularExpression.nombre, e.target, 'usuario');
             break;
             case "raza":
                 validateRecordField(regularExpression.nombre, e.target, 'raza');
@@ -204,12 +204,15 @@ const registerView = () => {
             case "nombre":
                 validateRecordField(regularExpression.nombre, e.target, 'nombre');
             break;
+            case "pais":
+                validateRecordField(regularExpression.nombre, e.target, 'pais');
+            break;    
             case "password":
                 validateRecordField(regularExpression.password, e.target, 'password');
-                validatePassword2();
+                validatePassword2(inputPassword1.value, inputPassword2.value);
             break;
             case "password2":
-                validatePassword2();
+                validatePassword2(inputPassword1.value, inputPassword2.value);
             break;
             case "email":
                 validateRecordField(regularExpression.correo, e.target, 'email');
@@ -224,66 +227,47 @@ const registerView = () => {
         input.addEventListener('blur', validateForm);
     });
     
-    const validateRecordField = (expresion, input, campo) => {
-        if(expresion.test(input.value)){
-          registerElement.querySelector(`#grupo--${campo}`).classList.remove('formulario--grupo-incorrecto');
-          registerElement.querySelector(`#grupo--${campo}`).classList.add('formulario--grupo-correcto');
-          registerElement.querySelector(`#grupo--${campo} i`).classList.remove('fa-times-circle');
-          registerElement.querySelector(`#grupo--${campo} i`).classList.add('fa-check-circle');
-          registerElement.querySelector(`#grupo--${campo} .formulario--input-error`).classList.remove('formulario--input-error-activo');
-          campos[campo] = true;
-        }
-        else{
-          registerElement.querySelector(`#grupo--${campo}`).classList.add('formulario--grupo-incorrecto');
-          registerElement.querySelector(`#grupo--${campo}`).classList.remove('formulario--grupo-correcto');
-          registerElement.querySelector(`#grupo--${campo} i`).classList.add('fa-times-circle');
-          registerElement.querySelector(`#grupo--${campo} i`).classList.remove('fa-check-circle');
-          registerElement.querySelector(`#grupo--${campo} .formulario--input-error`).classList.add('formulario--input-error-activo');
-          campos[campo] = false;
-        }
-    }
+    //evento SUBMIT
+    formRegister.addEventListener('submit', (e) => {
+        e.preventDefault //eliminar al final...
+        if (campos.user &&
+            campos.breed &&
+            campos.nameH &&
+            campos.country &&
+            campos.email &&
+            terminos.checked) {
+            //creo el usuario con email y pass
+            createUser(email.value, inputPassword1.value);
+
+            //le paso de parámetro un obj con todo lo del input, esta funcion desde firestore   
+            registerUser({
+                user: userDog.value,
+                breed: breedDog.value,
+                gender: gender,
+                birth: birth.value,
+                nameH: nameHuman.value,
+                country: country.value,
+                email: email.value })
+
+            //mensaje de exito
+            registerElement.querySelector('#formulario--mensaje-exito')
+                .classList.add('formulario__mensaje-exito-activo');
+
+            setTimeout(() => {
+                registerElement.querySelector('#formulario--mensaje-exito')
+                    .classList.remove('formulario__mensaje-exito-activo');
+            }, 5000);
     
-    const validatePassword2 = () => {
-        const inputPassword1 = registerElement.querySelector('#password');
-        const inputPassword2 = registerElement.querySelector('#password2');
-      
-        if(inputPassword1.value !== inputPassword2.value){
-            registerElement.querySelector(`#grupo--password2`).classList.add('formulario--grupo-incorrecto');
-            registerElement.querySelector(`#grupo--password2`).classList.remove('formulario--grupo-correcto');
-          //icono
-            registerElement.querySelector(`#grupo--password2 i`).classList.add('fa-times-circle');
-            registerElement.querySelector(`#grupo--password2 i`).classList.remove('fa-check-circle');
-      
-            registerElement.querySelector(`#grupo--password2 .formulario--input-error`).classList.add('formulario--input-error-activo');
-            campos['password'] = false;
-        } 
+            registerElement.querySelectorAll('#formulario--grupo-correcto').forEach((icono) => {
+                icono.classList.remove('formulario__grupo-correcto')
+            })
+        }
         else {
-            registerElement.querySelector(`#grupo--password2`).classList.remove('formulario--grupo-incorrecto');
-            registerElement.querySelector(`#grupo--password2`).classList.add('formulario--grupo-correcto');
-      
-            registerElement.querySelector(`#grupo--password2 i`).classList.remove('fa-times-circle');
-            registerElement.querySelector(`#grupo--password2 i`).classList.add('fa-check-circle');
-      
-            registerElement.querySelector(`#grupo--password2 .formulario--input-error`).classList.remove('formulario--input-error-activo');
-            campos['password'] = true;
+            registerElement.querySelector('#formulario--mensaje').classList.add('formulario--mensaje-activo')
         }
-    }
-    
-    const regularExpression = {
-        usuario: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
-        nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-        password: /^.{4,12}$/, // 4 a 12 digitos.
-        email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
-    };
-    
-    const campos = {
-        usuario: false,
-        raza: false,
-        nombre: false,
-        password: false,
-        email: false
-    };
-*/
+        
+    })
+
     return registerElement
 } 
 

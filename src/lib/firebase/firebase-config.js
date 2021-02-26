@@ -2,29 +2,30 @@ import { pushState } from '../router.js';
 
 //EVITAR dejar este archivo a la vista cuando se haga público el proyecto
 const firebaseConfig = {
-    apiKey: "AIzaSyAaODj-xRqenmcztHx7NlQSdjn1qymLsw4",
-    authDomain: "social-network-17cd8.firebaseapp.com",
-    projectId: "social-network-17cd8",
-    storageBucket: "social-network-17cd8.appspot.com",
-    messagingSenderId: "1098491151135",
-    appId: "1:1098491151135:web:f45ebeff7f405f84c9262a",
-    measurementId: "G-RF5REDL25N"
-  };
-
+  apiKey: "AIzaSyAaODj-xRqenmcztHx7NlQSdjn1qymLsw4",
+  authDomain: "social-network-17cd8.firebaseapp.com",
+  projectId: "social-network-17cd8",
+  storageBucket: "social-network-17cd8.appspot.com",
+  messagingSenderId: "1098491151135",
+  appId: "1:1098491151135:web:f45ebeff7f405f84c9262a",
+  measurementId: "G-RF5REDL25N"
+};
 
 // Inicializa Firebase
 firebase.initializeApp(firebaseConfig);
 
 //Creando Usuario con Email y Passwor
-const createUser = (email, password) => {
+const createUser = (email, password, cb) => {
   const auth = firebase.auth();
+  console.log("LLEGA a create--->", email, password);
 
   auth
     .createUserWithEmailAndPassword(email, password)
     .then (userCredential => {
       console.log("lo logramos");
+      cb(null, userCredential)
       //Enviamos por correlo la URL (durante la verificacion) para que llegue de nuevo a login-view
-      const config = {
+      /*const config = {
         url: 'http://localhost:5000/'
       }
 
@@ -32,15 +33,17 @@ const createUser = (email, password) => {
           userCredential.user.sendEmailVerification(config)
           //cierro sesión
           signOut()
-      }
+      }*/
+      /*
       setTimeout(() => { 
       //cerrar formulario
       document.querySelector('.register-view').style.display = "none"
-      }, 4000); 
+      }, 4000);*/ 
     })
     .catch(error => {
         console.error(error)
-        Materialize.toast(error.message, 4000) //mensaje flotante de error
+        cb(error)
+        //Materialize.toast(error.message, 4000) //mensaje flotante de error
     })
 }
 

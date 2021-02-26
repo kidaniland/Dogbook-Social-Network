@@ -15,7 +15,7 @@ const registerView = () => {
             <span>¡Registrate ahora!</span>
         </div>
 
-        <form action="" class="formulario" id="formulario">
+        <form class="formulario" id="formulario">
     
         <!--Grupo usuario-->
             <div class="formulario--grupo" id="grupo--usuario">
@@ -71,10 +71,10 @@ const registerView = () => {
             </div>
 
         <!--Grupo País de origen- humano-->
-            <div class="formulario--grupo" id="grupo--nombre">
-                <label for="nombre" class="formulario--label">País</label>
+            <div class="formulario--grupo" id="grupo--pais">
+                <label for="pais" class="formulario--label">País</label>
                 <div class="formulario--grupo-input">
-                    <input type="text" class="formulario--input" name="pais" id="paisHumano" placeholder="Chile">
+                    <input type="text" class="formulario--input" name="pais" id="pais" placeholder="Chile">
                     <i class="formulario--validacion-estado fas fa-times-circle"></i>
                     <p class="formulario--input-error">
                         El nombre tiene que ser de 4 a 16 dígitos y solo puede contener números, letras y/o guión bajo.
@@ -157,14 +157,14 @@ const registerView = () => {
     const selectGender = registerElement.querySelector('#genderDog');
     const birth = registerElement.querySelector('#bDayDog');
     const nameHuman = registerElement.querySelector('#nombre');
-    const country = registerElement.querySelector('#paisHumano');
+    const country = registerElement.querySelector('#pais');
     const email = registerElement.querySelector('#email');
     const inputPassword1 = registerElement.querySelector('#password');
     const inputPassword2 = registerElement.querySelector('#password2');
     const terminos = registerElement.querySelector('#terminos');
 
     const regularExpression = {
-        nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
+        nombre: /^[a-zA-ZÀ-ÿ\s]{3,40}$/, // Letras y espacios, pueden llevar acentos.
         password: /^.{6,12}$/, // 6 a 12 digitos.
         correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
     }
@@ -196,26 +196,27 @@ const registerView = () => {
     const validateForm = (e) => {
         switch (e.target.name) {
             case "usuario":
-                validateRecordField(regularExpression.nombre, e.target, 'usuario');
+                campos.user = validateRecordField(regularExpression.nombre, e.target, 'usuario');
+                
             break;
             case "raza":
-                validateRecordField(regularExpression.nombre, e.target, 'raza');
+               campos.breed = validateRecordField(regularExpression.nombre, e.target, 'raza');
             break;
             case "nombre":
-                validateRecordField(regularExpression.nombre, e.target, 'nombre');
+                campos.nameH = validateRecordField(regularExpression.nombre, e.target, 'nombre');
             break;
             case "pais":
-                validateRecordField(regularExpression.nombre, e.target, 'pais');
+                campos.country = validateRecordField(regularExpression.nombre, e.target, 'pais');
             break;    
             case "password":
                 validateRecordField(regularExpression.password, e.target, 'password');
-                validatePassword2(inputPassword1.value, inputPassword2.value);
+                validatePassword2();
             break;
             case "password2":
-                validatePassword2(inputPassword1.value, inputPassword2.value);
+                validatePassword2();
             break;
             case "email":
-                validateRecordField(regularExpression.correo, e.target, 'email');
+                campos.email = validateRecordField(regularExpression.correo, e.target, 'email');
             break;
         }
     }
@@ -229,43 +230,49 @@ const registerView = () => {
     
     //evento SUBMIT
     formRegister.addEventListener('submit', (e) => {
-        e.preventDefault //eliminar al final...
+        e.preventDefault() //eliminar al final...
         if (campos.user &&
             campos.breed &&
             campos.nameH &&
             campos.country &&
             campos.email &&
-            terminos.checked) {
+            terminos.checked === true) {
             //creo el usuario con email y pass
-            createUser(email.value, inputPassword1.value);
-
-            //le paso de parámetro un obj con todo lo del input, esta funcion desde firestore   
-            registerUser({
-                user: userDog.value,
-                breed: breedDog.value,
-                gender: gender,
-                birth: birth.value,
-                nameH: nameHuman.value,
-                country: country.value,
-                email: email.value })
-
-            //mensaje de exito
-            registerElement.querySelector('#formulario--mensaje-exito')
-                .classList.add('formulario__mensaje-exito-activo');
-
-            setTimeout(() => {
+            createUser(email.value, inputPassword1.value, (error, data)=>{
+                console.log("EXITO", error);
+                 //mensaje de exito
                 registerElement.querySelector('#formulario--mensaje-exito')
-                    .classList.remove('formulario__mensaje-exito-activo');
-            }, 5000);
-    
-            registerElement.querySelectorAll('#formulario--grupo-correcto').forEach((icono) => {
-                icono.classList.remove('formulario__grupo-correcto')
-            })
+                    .classList.add('formulario__mensaje-exito-activo');
+
+                setTimeout(() => {
+                    registerElement.querySelector('#formulario--mensaje-exito')
+                        .classList.remove('formulario__mensaje-exito-activo');
+                }, 5000);
+
+                registerElement.querySelectorAll('#formulario--grupo-correcto').forEach((icono) => {
+                    icono.classList.remove('formulario__grupo-correcto')
+                })
+            });
+            
+            console.log("SEGUIMOS...");
+
+            //formRegister.reset();
+            /*
+         //le paso de parámetro un obj con todo lo del input, esta funcion desde firestore   
+         registerUser({
+             user: userDog.value,
+             breed: breedDog.value,
+             gender: gender,
+             birth: birth.value,
+             nameH: nameHuman.value,
+             country: country.value,
+             email: email.value })
+            */
         }
         else {
+            console.log("---XXXXX----", campos.user, campos.breed, campos.nameH, campos.country, campos.email, terminos.checked);
             registerElement.querySelector('#formulario--mensaje').classList.add('formulario--mensaje-activo')
         }
-        
     })
 
     return registerElement

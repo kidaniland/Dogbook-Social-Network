@@ -1,8 +1,8 @@
 //EL DATABASE ESTA HABILITADO EN MODO DE PRUEBA
-export const dataBase = firebase.firestore();
+export const firestore = firebase.firestore();
 // Almacena datos de cada usuario
 const registerUser = (user) => {
-    return dataBase.collection("users")
+    return firestore.collection("users")
         .add(user)
         .then(docRef => {
             console.log("ID del documento: ", docRef.id);
@@ -18,7 +18,7 @@ const dataPost = () => {
   auth
   .onAuthStateChanged(user => { //cada vez q se dispare obten user
     if (user){
-      dataBase.collection('post')
+      firestore.collection('post')
         .get()
         .then((snapshot) => {
           console.log('Muestra lo capturado-->', snapshot.docs)

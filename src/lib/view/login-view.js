@@ -59,7 +59,7 @@ const loginView = () => {
     const loginForm = loginElement.querySelector('#formularioLogin')
     //evento
     loginForm.addEventListener('submit', (e) => {
-        e.preventDefault 
+        e.preventDefault()
         const loginEmail = document.querySelector('#userEmail').value;
         const loginPassword = document.querySelector('#userPassword').value;
         //console.log("ENVIAMOS>>>", loginEmail, loginPassword);

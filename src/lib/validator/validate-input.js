@@ -1,44 +1,57 @@
-const campos = [];
+export const validateRecordField = (expresion, input, campo) => {
+  let grupo = document.querySelector(`#grupo--${campo}`);
+  let grupoI = document.querySelector(`#grupo--${campo} i`);
+  let grupoFormError = document.querySelector(`#grupo--${campo} .formulario--input-error`);
 
-export const validatePassword2 = (pass1, pass2) => {
-      
-    if(pass1.value !== pass2.value){
-        document.querySelector(`#grupo--password2`).classList.add('formulario--grupo-incorrecto');
-        document.querySelector(`#grupo--password2`).classList.remove('formulario--grupo-correcto');
+  if(expresion.test(input.value)){
+
+    grupo.classList.remove('formulario--grupo-incorrecto');
+    grupo.classList.add('formulario--grupo-correcto');
+
+    grupoI.classList.remove('fa-times-circle');
+    grupoI.classList.add('fa-check-circle');
+
+    grupoFormError.classList.remove('formulario--input-error-activo');
+    return true;
+  }
+  else{
+    grupo.classList.add('formulario--grupo-incorrecto');
+    grupo.classList.remove('formulario--grupo-correcto');
+    grupoI.classList.add('fa-times-circle');
+    grupoI.classList.remove('fa-check-circle');
+    grupoFormError.classList.add('formulario--input-error-activo');
+    return false;
+  }
+
+}
+
+export const validatePassword2 = () => {
+  const inputPassword1 = document.getElementById('password');
+	const inputPassword2 = document.getElementById('password2');
+
+  const groupPss2 = document.querySelector(`#grupo--password2`);
+  const groupPssI = document.querySelector(`#grupo--password2 i`);
+  const formInputErr = document.querySelector(`#grupo--password2 .formulario--input-error`);
+
+    if(inputPassword1.value !== inputPassword2.value){
+        groupPss2.classList.add('formulario--grupo-incorrecto');
+        groupPss2.classList.remove('formulario--grupo-correcto');
       //icono
-        document.querySelector(`#grupo--password2 i`).classList.add('fa-times-circle');
-        document.querySelector(`#grupo--password2 i`).classList.remove('fa-check-circle');
+        groupPssI.classList.add('fa-times-circle');
+        groupPssI.classList.remove('fa-check-circle');
   
-        document.querySelector(`#grupo--password2 .formulario--input-error`).classList.add('formulario--input-error-activo');
-        campos['password'] = false;
+        formInputErr.classList.add('formulario--input-error-activo');
+        return false;
     } 
     else {
-        document.querySelector(`#grupo--password2`).classList.remove('formulario--grupo-incorrecto');
-        document.querySelector(`#grupo--password2`).classList.add('formulario--grupo-correcto');
+        groupPss2.classList.remove('formulario--grupo-incorrecto');
+        groupPss2.classList.add('formulario--grupo-correcto');
   
-        document.querySelector(`#grupo--password2 i`).classList.remove('fa-times-circle');
-        document.querySelector(`#grupo--password2 i`).classList.add('fa-check-circle');
+        groupPssI.classList.remove('fa-times-circle');
+        groupPssI.classList.add('fa-check-circle');
   
-        document.querySelector(`#grupo--password2 .formulario--input-error`).classList.remove('formulario--input-error-activo');
-        campos['password'] = true;
+        formInputErr.classList.remove('formulario--input-error-activo');
+        return true;
     }
 }
 
-export const validateRecordField = (expresion, input, campo) => {
-    if(expresion.test(input.value)){
-      document.querySelector(`#grupo--${campo}`).classList.remove('formulario--grupo-incorrecto');
-      document.querySelector(`#grupo--${campo}`).classList.add('formulario--grupo-correcto');
-      document.querySelector(`#grupo--${campo} i`).classList.remove('fa-times-circle');
-      document.querySelector(`#grupo--${campo} i`).classList.add('fa-check-circle');
-      document.querySelector(`#grupo--${campo} .formulario--input-error`).classList.remove('formulario--input-error-activo');
-      campos[campo] = true;
-    }
-    else{
-      document.querySelector(`#grupo--${campo}`).classList.add('formulario--grupo-incorrecto');
-      document.querySelector(`#grupo--${campo}`).classList.remove('formulario--grupo-correcto');
-      document.querySelector(`#grupo--${campo} i`).classList.add('fa-times-circle');
-      document.querySelector(`#grupo--${campo} i`).classList.remove('fa-check-circle');
-      document.querySelector(`#grupo--${campo} .formulario--input-error`).classList.add('formulario--input-error-activo');
-      campos[campo] = false;
-    }
-}

@@ -1,5 +1,3 @@
-import { pushState } from '../router.js';
-
 //EVITAR dejar este archivo a la vista cuando se haga público el proyecto
 const firebaseConfig = {
   apiKey: "AIzaSyAaODj-xRqenmcztHx7NlQSdjn1qymLsw4",

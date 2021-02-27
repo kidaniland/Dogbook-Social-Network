@@ -1,5 +1,6 @@
 import { createUser } from '../firebase/firebase-config.js';
 import { registerUser } from '../firebase/firestore.js';
+import { hashCondition, pushState} from '../router.js';
 import { validatePassword2 } from '../validator/validate-input.js';
 import { validateRecordField } from '../validator/validate-input.js';
 
@@ -180,7 +181,7 @@ const registerView = () => {
     //select género del perro
     let fragment = document.createDocumentFragment();
     const genderDog = ['Selecciona:', 'Macho', 'Hembra', 'Desconocido'];
-    for (const gender of genderDog){
+    for (const gender of genderDog) {
         const selectG = document.createElement('option');
         selectG.setAttribute('value', gender.toLowerCase());
         selectG.textContent = gender;
@@ -197,27 +198,27 @@ const registerView = () => {
         switch (e.target.name) {
             case "usuario":
                 campos.user = validateRecordField(regularExpression.nombre, e.target, 'usuario');
-                
-            break;
+
+                break;
             case "raza":
-               campos.breed = validateRecordField(regularExpression.nombre, e.target, 'raza');
-            break;
+                campos.breed = validateRecordField(regularExpression.nombre, e.target, 'raza');
+                break;
             case "nombre":
                 campos.nameH = validateRecordField(regularExpression.nombre, e.target, 'nombre');
-            break;
+                break;
             case "pais":
                 campos.country = validateRecordField(regularExpression.nombre, e.target, 'pais');
-            break;    
+                break;
             case "password":
                 validateRecordField(regularExpression.password, e.target, 'password');
                 validatePassword2();
-            break;
+                break;
             case "password2":
                 validatePassword2();
-            break;
+                break;
             case "email":
                 campos.email = validateRecordField(regularExpression.correo, e.target, 'email');
-            break;
+                break;
         }
     }
 
@@ -227,7 +228,7 @@ const registerView = () => {
         input.addEventListener('keyup', validateForm);
         input.addEventListener('blur', validateForm);
     });
-    
+
     //evento SUBMIT
     formRegister.addEventListener('submit', (e) => {
         e.preventDefault() //eliminar al final...
@@ -238,44 +239,43 @@ const registerView = () => {
             campos.email &&
             terminos.checked === true) {
             //creo el usuario con email y pass
-            createUser(email.value, inputPassword1.value, (error, data)=>{
+            createUser(email.value, inputPassword1.value, (error, data) => {
                 console.log("EXITO", error);
-                 //mensaje de exito
+                //le paso de parámetro un obj con todo lo del input, esta funcion desde firestore   
+                registerUser({
+                    user: userDog.value,
+                    breed: breedDog.value,
+                    gender: gender,
+                    birth: birth.value,
+                    nameH: nameHuman.value,
+                    country: country.value,
+                    email: email.value
+                })
+
+                //mensaje de exito
                 registerElement.querySelector('#formulario--mensaje-exito')
-                    .classList.add('formulario__mensaje-exito-activo');
+                    .classList.add('formulario--mensaje-exito-activo');
 
                 setTimeout(() => {
                     registerElement.querySelector('#formulario--mensaje-exito')
-                        .classList.remove('formulario__mensaje-exito-activo');
+                        .classList.remove('formulario--mensaje-exito-activo');
                 }, 5000);
 
-                registerElement.querySelectorAll('#formulario--grupo-correcto').forEach((icono) => {
-                    icono.classList.remove('formulario__grupo-correcto')
+                registerElement.querySelectorAll('.formulario--grupo-correcto').forEach((icono) => {
+                    icono.classList.remove('formulario--grupo-correcto')
                 })
+                formRegister.reset();
+                setTimeout(() => {
+                    pushState('#/')
+                }, 3000);
             });
-            
-            console.log("SEGUIMOS...");
-
-            //formRegister.reset();
-            /*
-         //le paso de parámetro un obj con todo lo del input, esta funcion desde firestore   
-         registerUser({
-             user: userDog.value,
-             breed: breedDog.value,
-             gender: gender,
-             birth: birth.value,
-             nameH: nameHuman.value,
-             country: country.value,
-             email: email.value })
-            */
         }
         else {
-            console.log("---XXXXX----", campos.user, campos.breed, campos.nameH, campos.country, campos.email, terminos.checked);
             registerElement.querySelector('#formulario--mensaje').classList.add('formulario--mensaje-activo')
         }
     })
 
     return registerElement
-} 
+}
 
 export { registerView }

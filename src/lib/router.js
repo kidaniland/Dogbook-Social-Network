@@ -9,7 +9,7 @@ import { wallView } from '../lib/view/wall-view.js';
 //Condicion hash para pantalla de inicio, si este es " " o null entonces w.l.h= #/
 export const hashCondition = (hash) => {
     console.log('HAS --ZZZ>', hash)
-    if (hash === ''){//|| localStorage.getItem('user') === null) {
+    if (hash === ''){
         return router('#/');
     }
     return router(hash);
@@ -44,7 +44,8 @@ export const router = (hash) => {
 // finalmente se modifica el hash en la url
 export const pushState = (route) => {
     let stateObj = {};
-    history.pushState(stateObj, "page 2", route);
+    history.pushState(stateObj, "", route);
     window.dispatchEvent(new Event('pushState'));
     window.dispatchEvent(new Event('locationchange'));
+    window.dispatchEvent(new Event('hashchange'))
 };

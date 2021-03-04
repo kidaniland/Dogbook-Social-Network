@@ -368,6 +368,7 @@ a:hover{
     }
   } 
 
+
 /*----------VISTA WALL - HEADER ------------*/
 header {
   position: relative;
@@ -426,13 +427,13 @@ header {
   padding: 1rem 2rem;
   text-decoration: none;
 }
-
 .nav--list .nav--item .nav--link .active,
 .nav--list .nav--item .nav--link .active:hover{
   background: #32be8f;
   color: #fff;
   transition: 0.5s;
 }
+/*Mediaqueries HEADER*/
 @media (max-width: 1200px){
   header{
     margin: 2rem;
@@ -478,6 +479,7 @@ header {
     left: 0;
   }
 }
+
 /*----------VISTA WALL ------------*/
 .wall--content{
   display: grid;
@@ -486,15 +488,67 @@ header {
   gap: 2rem; 
   font-size: 1.6rem;
 }
+
+/*Sidebar -Left*/
 .perfil--resumen{
-  background-color: yellow;
+  width: 25rem;
+	height: 40rem;
+  margin: 2rem;
+	background-color: yellow;
+	float:left;
+  box-sizing: border-box;
+  border-radius: 0.4rem;
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, .2);
 }
+.sidebar--left{
+  margin: 1rem;
+  margin-top: 5rem;
+}
+.img--side{
+  border-radius: 50%;
+  width: 50%;
+  margin-left: 6rem;
+}
+.text--side{
+  font-size: 1.4rem;
+  color:#333;
+  text-align: center;
+}
+.span--side{
+  font-size: 2.4rem;
+  color: #277e61;
+}
+.link--side{
+  display: block;
+	margin: 1rem auto;
+	font-size: 1.4rem;
+	border-radius: 2.5rem;
+	border: 0;
+	outline: 0;
+	background-image: linear-gradient(to right, #32be8f, #277e61, #32be8f);
+  background-size: 200%;
+	color: white;
+	text-decoration: none;
+	width: 20rem;
+	text-align: center;
+	padding: 0.5rem;
+	margin-bottom: 1.5rem;
+}
+.link--side:hover {
+  background-position: right;
+} 
+
+/*Contenido central*/
 .post--resumen{
   background-color: violet;
 }
+
+/*Sidebar -Right*/
 .recomendacion{
   background-color: turquoise;
 }
+
+/*Mediaqueries - WALL*/
 @media (max-width: 768px){
   .wall--content {
     grid-template-columns: 1fr;
@@ -506,6 +560,7 @@ header {
     display:none;
   }
 }
+
 /*----------VISTA WALL - FOOTER------------*/
 footer{
   background-color: #bb2929;

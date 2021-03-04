@@ -2,7 +2,7 @@
 
 import { loginView } from '../lib/view/login-view.js';
 import { registerView } from '../lib/view/register-view.js';
-import { wallView } from '../lib/view/wall-view.js';
+import { wallView } from './view/wall-view.js';
 
 //EL RAUTER TIENE QUE TENER ACCESO A LA INFORMACION DE LA API(O FIREBASE)
 
@@ -22,7 +22,7 @@ export const router = (hash) => {
   
     switch (hash) {
         case '#/':
-            return mainContainers.appendChild(loginView()); //lo que vienen de view
+            return mainContainers.appendChild(loginView()); 
         break;
         case '#/registro':
             return mainContainers.appendChild(registerView()); 
@@ -32,9 +32,11 @@ export const router = (hash) => {
         break;
         case '#/post':
             //lo que venga view
+            console.log("ESTOY EN POST")
         break;
         case '#/perfil':
             //lo que venga view 
+            console.log("ESTOY EN EL PERFIL")
         break;
         default:
             mainContainers.innerHTML = '<h2>No existe</h2>';

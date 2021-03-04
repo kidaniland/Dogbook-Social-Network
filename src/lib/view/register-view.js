@@ -1,7 +1,7 @@
 import { createUser } from '../firebase/firebase-config.js';
 import { registerUser } from '../firebase/firestore.js';
-import { hashCondition, pushState} from '../router.js';
-import { validatePassword2 } from '../validator/validate-input.js';
+import { pushState} from '../router.js';
+import { showMessage, validatePassword2 } from '../validator/validate-input.js';
 import { validateRecordField } from '../validator/validate-input.js';
 
 
@@ -253,17 +253,7 @@ const registerView = () => {
                 })
 
                 //mensaje de exito
-                registerElement.querySelector('#formulario--mensaje-exito')
-                    .classList.add('formulario--mensaje-exito-activo');
-
-                setTimeout(() => {
-                    registerElement.querySelector('#formulario--mensaje-exito')
-                        .classList.remove('formulario--mensaje-exito-activo');
-                }, 5000);
-
-                registerElement.querySelectorAll('.formulario--grupo-correcto').forEach((icono) => {
-                    icono.classList.remove('formulario--grupo-correcto')
-                })
+                showMessage(registerElement);
                 formRegister.reset();
                 setTimeout(() => {
                     pushState('#/')
@@ -279,3 +269,5 @@ const registerView = () => {
 }
 
 export { registerView }
+
+

@@ -55,3 +55,26 @@ export const validatePassword2 = () => {
     }
 }
 
+export const showMessage =(registerElement) => {
+  registerElement.querySelector('#formulario--mensaje-exito')
+      .classList.add('formulario--mensaje-exito-activo');
+
+  setTimeout(() => {
+      registerElement.querySelector('#formulario--mensaje-exito')
+          .classList.remove('formulario--mensaje-exito-activo');
+  }, 5000);
+
+  registerElement.querySelectorAll('.formulario--grupo-correcto').forEach((icono) => {
+      icono.classList.remove('formulario--grupo-correcto');
+  });
+}
+
+//funcion para q los inputs no al enviar esten vacios
+export const validatorLogin = (userValue, passwordValue) => {
+  if (userValue.trim() === '' || passwordValue.trim() === '') {
+      return true;
+  }
+  else {
+      return false;
+  }
+}

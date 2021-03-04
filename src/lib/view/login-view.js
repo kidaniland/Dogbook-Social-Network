@@ -1,4 +1,6 @@
 import { singIn } from '../firebase/firebase-config.js';
+import { pushState } from '../router.js';
+import { validatorLogin } from '../validator/validate-input.js';
 
 const loginView = () => {
     const loginContent = `
@@ -64,32 +66,14 @@ const loginView = () => {
         const loginPassword = document.querySelector('#userPassword').value;
         //console.log("ENVIAMOS>>>", loginEmail, loginPassword);
         validatorLogin(loginEmail, loginPassword);
-        singIn(loginEmail, loginPassword); 
+        singIn(loginEmail, loginPassword, (error, data) => {
+            console.log("ESTO ES EL CALLBACK---", error);
+            loginForm.reset();
+                setTimeout(() => {
+                    pushState('#/muro')
+                }, 2000);
+        }); 
     })
-
-    /*
-    const loginBtn = loginElement.querySelector('#loginBtn');
-    loginBtn.addEventListener('click', (e) => {
-        e.preventDefault
-        const loginEmail = document.querySelector('#userEmail').value;
-        const loginPassword = document.querySelector('#userPassword').value;
-        //console.log("ENVIAMOS>>>", loginEmail, loginPassword);
-        
-        validatorLogin(loginEmail, loginPassword);
-        singIn(loginEmail, loginPassword); 
-    })
-    */
-
-    //funcion para q los inputs no esten vacios
-    const validatorLogin = (userValue, passwordValue) => {
-        if (userValue.trim() === '' || passwordValue.trim() === '') {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    
 
     //Funciones estéticas de los input -PAG LOGIN-
     const focusFunction = (e) => {

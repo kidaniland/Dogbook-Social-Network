@@ -39,35 +39,35 @@ const createUser = (email, password, cb) => {
       }, 4000);*/ 
     })
     .catch(error => {
-        console.error(error)
-        cb(error)
-        //Materialize.toast(error.message, 4000) //mensaje flotante de error
+      console.error(error)
+      cb(error)
     })
 }
 
 //Iniciar sesión
-const singIn = (email, password) => {
+const singIn = (email, password, callback) => {
   console.log("LLEGA-->", email, password);
   const auth = firebase.auth();
   //console.log("---->", auth);
   auth
     .signInWithEmailAndPassword(email, password) //regresa una promise que podrá identf al usuario ya registrado
-    .then (data => {
+    .then (userCredential => {
       console.log("SE HA LOGEADO")
-      if(data.user.emailVerified === false){
+      callback(null, userCredential)
+      /*if(userCredential.user.emailVerified === false){
         localStorage.setItem('user', JSON.stringify(
           {
-            name: data.user.displayName,
-            email: data.user.email,
-            photo: data.user.photoURL,
-            uid: data.user.uid,
+            name: userCredential.user.displayName,
+            email: userCredential.user.email,
+            photo: userCredential.user.photoURL,
+            uid: userCredential.user.uid,
           }))
           //por ultimos pasamos al muro
           pushState('#/muro')
       }
       else{
         Materialize.toast('Verifica tu correo electrónico antes de ingresar.')
-      } 
+      } */
     })
     .catch(error => {
       console.error(error)

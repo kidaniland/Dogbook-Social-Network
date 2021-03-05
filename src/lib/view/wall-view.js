@@ -1,23 +1,26 @@
 import { headerView } from "./header-view.js";
 import { footerView } from "./footer-view.js";
+import { postContentView } from "./postcontent-view.js";
 
 const wallView = () => {
     const wallContent = `
+
         ${headerView}
+
         <div class ="wall--content">
 
             <div class="perfil--resumen">
                 <div class="sidebar--left">
 
-                    <img src="./image/avatar.png" class="img--side">
+                    <img src="./image/avatar.png" class="img--side" id="avatarUser">
                     <p class="text--side">
                         Soy: </br> 
-                        <span class="span--side" id="sideUser">
+                        <span class="span--side" id="username">
                             Firulais
                         </span>
                     </p>
                     <p class="text--side">
-                        Mi human@ es: </br>
+                        Mi humano se llama: </br>
                         <span class="span--side" id="sideName">
                             Daniela Villa
                         </span>
@@ -32,70 +35,64 @@ const wallView = () => {
 
 
             <div class="post--content">
-                <div class="main mainpost" style="margin-bottom:20px; padding-bottom:10px;">	
 
-                    <div class="userimg">
-                        <img src="./image/avatar.png">
+                <div class="make--post">	
+                    <div class="make--post-img">
+                        <img class="make--post-img-user" id="avatarUser" src="./image/avatar.png">
                     </div>
 
-                    <div class="username">				 
-                        <p class="name" style="top:15px;">Firulais</p>
+                    <div class="make--post-username">				 
+                        <p class="make--post-name" id="username">Firulais</p>
                     </div>
 
-                    <p class="quotes">
-                        <textarea id="mypara" placeholder="¿Qué estás oliendo?, envía un imagen o ladrido"></textarea>
-                    </p>
-
-                    <!--botones de interaccion-->
-
-                    <div class="post">
-                        <img id="load2" class="postimg" src=" ">
+                    <div class="make--post-post">
+                        <textarea id="makePost" placeholder="¿Qué estás oliendo?, envía un imágen o ladrido."></textarea>
                     </div>
 
-                    <div class="postbar">
-                        <input type="file" accept="images/*" id="chooseimg">
-                        <button type="button" class="imgbttn" id="imgbttn">
-                            <i class="far fa-image"></i>
+                    <div class="make--post-load">
+                        <img id="load2" class="post-img" src=" ">
+                    </div>
+
+                    <div class="make--postbar">
+                        <input type="file" accept="images/*" id="chooseImg">
+                        <button type="button" id="likepost" class="postbar-bttn">
+                            <i class="fas fa-paper-plane" id="postbarImg"></i>
                         </button>
-                        <span class="span--like" id="like-number">0</span>
-                        <button type="button" id="likepost" class="postmypost">
-                            <i class="fas fa-paw"></i>
-                        </button>
-                        <button type="button" id="postmypost" class="postmypost">
-                            <i class="far fa-comment"></i>
+                        <button type="button" class="postbar-bttn" id="imgbttn">
+                            <i class="far fa-image" id="postbarImg"></i>
                         </button>
                     </div>
-
                  </div>
+
+                 <div class="post--content">
+                    ${postContentView}
+                 </div>
+
             </div>
 
 
             <div class="recomendacion">
-                <div class="sidebarright">
+                <div class="sideba--right">
 
                     <div class="right-content">
-                        <img src="./image/avatar-dog.png">
-                        <p class="name">Dog 1</p>
-                        <a href="" id="addFriend1">Agregar amigo</a>
-
+                        <img class="img--side-right" src="./image/avatar-dog.png">
+                        <p class="user--side-right">Dino</p>
+                        <a class="a--side-right" id="addFriend1">Agregar amigo</a>
                     </div>
-
                     <div class="right-content">
-                        <img src="./image/avatar-dog.png">
-                        <p class="name">Dog 2</p>
-                        <a href="" id="addFriend2">Agregar amigo</a>
+                        <img class="img--side-right" src="./image/avatar-dog.png">
+                        <p class="user--side-right">Titto</p>
+                        <a class="a--side-right" id="addFriend1">Agregar amigo</a>
                     </div>
-
                     <div class="right-content">
-                        <img src="./image/avatar-dog.png">
-                        <p class="name">Dog 3</p>
-                        <a href="" id="addFriend3">Agregar amigo</a>
+                        <img class="img--side-right" src="./image/avatar-dog.png">
+                        <p class="user--side-right">Luna</p>
+                        <a class="a--side-right" id="addFriend1">Agregar amigo</a>
                     </div>
-
                     <div class="right-content">
-                        <img src="./image/avatar-dog.png">
-                        <p class="name">Dog 4</p>
-                        <a href="" id="addFriend4">Agregar amigo</a>
+                        <img class="img--side-right" src="./image/avatar-dog.png">
+                        <p class="user--side-right">Toronto</p>
+                        <a class="a--side-right" id="addFriend1">Agregar amigo</a>
                     </div>
 
                 </div>    

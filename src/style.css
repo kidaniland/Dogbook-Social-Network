@@ -484,9 +484,8 @@ header {
 .wall--content{
   display: grid;
   width: 100%;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 2fr;
   gap: 2rem; 
-  font-size: 1.6rem;
 }
 
 /*Sidebar -Left*/
@@ -538,14 +537,132 @@ header {
   background-position: right;
 } 
 
-/*Contenido central*/
-.post--resumen{
+/*Contenido central POST*/
+.post--content{
   background-color: violet;
+  float: left;
+  width: 57rem;
+  margin-top: 2rem;
 }
+/*crea un post*/
+.make--post{
+  background-color: #d2faed ;
+  height: 22rem;
+	border: 0.1rem solid #B7B7B7;
+	border-radius: 0.4rem;
+	padding: 1.5rem;
+	margin-bottom: 2rem;
+	box-shadow: .4rem .1rem .5rem #999;
+}
+.make--post-img{
+	float: left;
+}
+.make--post-img-user{
+  width: 6rem;
+	height: 6rem;
+  border-radius: 50%;
+}
+.make--post-name{
+  display: inline;
+	padding-left: 1.8rem;
+	font-size: 1.6rem;
+	position: relative;
+	top: 1.4rem;
+}
+.make--post-post{
+  margin: 1.2rem .4rem .8rem .4rem;
+	font-size: 1.6;
+	text-align: justify;
+	padding: .5rem;
+}
+.make--post-post textarea{
+  margin-top: .8rem;
+	width: 100%;
+	height: 7rem;
+	outline: 0;
+	padding: .5rem;
+	border: .1rem solid #D1D1D1;
+	font-size: 1.6rem;
+	text-align: justify;
+	resize: none;
+	box-sizing: border-box;
+}
+.make--postbar{
+  padding: 1rem 1rem 1rem 1rem;
+}
+.make--postbar #chooseImg{
+  width: 9rem;
+	height: 2.8rem;
+	font-size: 1.2rem;
+	position:absolute;
+	opacity: 0;
+}
+.postbar-bttn{
+  display: inline;
+  width: 5rem;
+  height: 3rem;
+  float: right;
+  margin: -3rem .5rem .5rem .5rem;
+	background-color: white;
+	border: none;
+	border-radius: .4rem;
+	outline: 0;
+  cursor: pointer;
+  font-size: 3rem;
+  color: #333;
+}
+.postbar-bttn:hover{
+  color: #32be8f;
+}
+
+/*Post realizados*/
+
 
 /*Sidebar -Right*/
 .recomendacion{
   background-color: turquoise;
+  display: block;
+}
+.right-content{
+  float: right;
+	width: 26rem;
+	height: 10rem;
+  background-color: #FFFFFF;
+  border: .1rem solid #B7B7B7;
+	border-radius: .4rem;
+	box-shadow: .2rem .6rem .6rem #999999;
+	padding: 2rem;
+}
+.img--side-right{
+  display: inline;
+	width: 6rem;
+	height: 6rem;
+	border-radius: 50%;
+	float: left;
+}
+.user--side-right{
+  display: block;
+	width: 12rem;
+	margin: auto auto;
+	margin-left: 1.5rem;
+	margin-top: 1.2rem;
+	float: left;
+	text-align: left;
+	font-size: 1.4rem;
+}
+.a--side-right{
+  display: block;
+	float: right;
+	width: 12rem;
+	font-size: 1.3rem;
+	margin-top: 0.7rem;
+	text-decoration: none;
+	text-align: center;
+	color: #333;
+	height: 2.5rem;
+	padding: 0.1rem;
+	border: 0.2rem solid #B7B7B7;
+	border-radius: 0.4rem;
 }
 
 /*Mediaqueries - WALL*/

@@ -16,7 +16,7 @@ const loginView = () => {
             
             <!--grupo bienvenida-->
                 <img src="./image/avatar.png" alt="avatar" class="avatar">
-                <h2>Dogbook</h2>
+                <h2>Bienvenido</h2>
 
             <!--grupo usuario-->
                 <div class="input-div one">
@@ -71,8 +71,10 @@ const loginView = () => {
             loginForm.reset();
                 setTimeout(() => {
                     pushState('#/muro')
+                    document.querySelector('.nav--list').style.display = 'flex';
                 }, 2000);
         }); 
+        
     })
 
     //Funciones estéticas de los input -PAG LOGIN-

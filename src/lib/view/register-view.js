@@ -232,6 +232,7 @@ const registerView = () => {
     //evento SUBMIT
     formRegister.addEventListener('submit', (e) => {
         e.preventDefault() //eliminar al final...
+
         if (campos.user &&
             campos.breed &&
             campos.nameH &&
@@ -239,8 +240,9 @@ const registerView = () => {
             campos.email &&
             terminos.checked === true) {
             //creo el usuario con email y pass
-            createUser(email.value, inputPassword1.value, (error, data) => {
-                console.log("EXITO", error);
+            createUser(email.value, inputPassword1.value, (error) => {
+                if (error)
+                    return console.log("EXITO", error);
                 //le paso de parámetro un obj con todo lo del input, esta funcion desde firestore   
                 registerUser({
                     user: userDog.value,
@@ -250,19 +252,25 @@ const registerView = () => {
                     nameH: nameHuman.value,
                     country: country.value,
                     email: email.value
-                })
-
-                //mensaje de exito
-                showMessage(registerElement);
-                formRegister.reset();
-                setTimeout(() => {
-                    pushState('#/')
-                }, 3000);
+                }, (error) => {
+                    if (error){
+                        console.log("ERROR ", error)
+                    }
+                    else{
+                        //mensaje de exito
+                        showMessage(registerElement);
+                        formRegister.reset();
+                        setTimeout(() => {
+                            pushState('#/')
+                        }, 3000);
+                    }
+                })                
             });
         }
         else {
             registerElement.querySelector('#formulario--mensaje').classList.add('formulario--mensaje-activo')
         }
+    
     })
 
     return registerElement

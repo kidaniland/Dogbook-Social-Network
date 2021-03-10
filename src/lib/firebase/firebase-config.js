@@ -1,3 +1,5 @@
+import { pushState } from "../router.js";
+
 //EVITAR dejar este archivo a la vista cuando se haga público el proyecto
 const firebaseConfig = {
   apiKey: "AIzaSyAaODj-xRqenmcztHx7NlQSdjn1qymLsw4",
@@ -43,6 +45,7 @@ const createUser = (email, password, cb) => {
       cb(error)
     })
 }
+
 
 //Iniciar sesión
 const singIn = (email, password, callback) => {
@@ -92,5 +95,6 @@ const signOut = () => {
 
 export {
   createUser,
-  singIn 
+  singIn,
+  signOut
 }

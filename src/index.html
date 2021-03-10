@@ -10,14 +10,41 @@
   <title>Dogbook</title>
 </head>
 <body>
-   
+  <header>
+    <nav class="nav" id="navMenu">
+        <label class="header--logo">D<i class="fas fa-paw"></i>gbook</label>
+        <input type="checkbox" id="check">  
+        <label for= "check" class="menu--toggle">
+            <i class="fas fa-bars"></i> 
+        </label>
+        <ul class="nav--list">
+            <li class="nav--item">
+                <a href="#/muro" class="nav--link">
+                    <i class="fas fa-home" class="nav--icon"></i> 
+                    Inicio
+                </a>
+            </li>
+            <li class="nav--item">
+                <a href="#/perfil" class="nav--link" id="perfil">
+                    <i class="fas fa-dog" class="nav--icon"></i>
+                    Perfil 
+                </a>
+            </li>
+            <li class="nav--item">
+                <button class="nav--link cierra" id="logout"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+            </li>
+        </ul>
+    </nav>
+  </header>
+  <main id="root"></main>
+
   <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script><!--principal-->
   <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script><!--autentificación-->
   <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script><!--guarda datos-->
   
   <script type="module" src="main.js"></script>
 
-  <main id="root"></main>
+
 
 </body>
 </html>

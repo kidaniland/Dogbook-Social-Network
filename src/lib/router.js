@@ -1,14 +1,14 @@
 /*---LUGAR DESDE DONDE SE INVOCARAN TODAS LAS PETICIONES---*/
-
 import { loginView } from '../lib/view/login-view.js';
 import { registerView } from '../lib/view/register-view.js';
-import { wallView } from './view/wall-view.js';
+import { wallView } from './controler/wallview-controler.js';
+import { profileView } from './view/profile-view.js';
 
 //EL RAUTER TIENE QUE TENER ACCESO A LA INFORMACION DE LA API(O FIREBASE)
 
 //Condicion hash para pantalla de inicio, si este es " " o null entonces w.l.h= #/
 export const hashCondition = (hash) => {
-    console.log('HAS --ZZZ>', hash)
+    //console.log('HAS --ZZZ>', hash)
     if (hash === ''){
         return router('#/');
     }
@@ -30,13 +30,8 @@ export const router = (hash) => {
         case '#/muro':
             return mainContainers.appendChild(wallView());
         break;
-        case '#/post':
-            //lo que venga view
-            console.log("ESTOY EN POST")
-        break;
         case '#/perfil':
-            //lo que venga view 
-            console.log("ESTOY EN EL PERFIL")
+            return mainContainers.appendChild(profileView());
         break;
         default:
             mainContainers.innerHTML = '<h2>No existe</h2>';

@@ -1,7 +1,6 @@
 const footerView = `
     <footer>
-        <div class="wrapper">
-        <div class="foot">
+        <div class="footer--list">
 
             <ul>
                 <li><a href="">Sobre Dogbook</a></li>
@@ -9,7 +8,6 @@ const footerView = `
                 <li><a href="">Política de privacidad</a></li>
                 <li><a href="">Ayuda</a></li>
             </ul>
-
             <p>Copyright ©mdcvillas 2021 Todos los derechos reservados.</p>
         </div>
     </footer>

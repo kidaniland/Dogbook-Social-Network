@@ -23,7 +23,7 @@ body{
     width: 100vw;
     height: 100vh;
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /*buscar significado*/
+    grid-template-columns: repeat(2, 1fr);
     grid-gap: 7rem;
     padding: 0 2rem;
 }
@@ -78,7 +78,7 @@ form{
     transition: .3s;
     font-size: 2rem;
 }
-.input-div > div{ /*buscar*/
+.input-div > div{
     position: relative;
     height: 4.5rem; 
 }
@@ -406,7 +406,7 @@ header {
 .nav .nav--list{
   margin: 0;
   padding: 0;
-  display: flex;
+  display: none;
   line-height: 2rem;
   float: right;
 }
@@ -427,11 +427,18 @@ header {
   padding: 1rem 2rem;
   text-decoration: none;
 }
-.nav--list .nav--item .nav--link .active,
-.nav--list .nav--item .nav--link .active:hover{
-  background: #32be8f;
-  color: #fff;
-  transition: 0.5s;
+.nav--list .nav--item .nav--link-inicia{
+  margin: 0.1rem 0;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  font-size: 1.7rem;
+}
+.nav--list .nav--item .nav--link-cierra{
+  display: none;
+  margin: 0.1rem 0;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  font-size: 1.7rem;
 }
 /*Mediaqueries HEADER*/
 @media (max-width: 1200px){
@@ -483,8 +490,10 @@ header {
 /*----------VISTA WALL ------------*/
 .wall--content{
   display: grid;
-  width: 100%;
-  grid-template-columns: 1fr 2fr;
+  width: 90%;
+  max-width: 120rem;
+  margin: 2rem auto;
+  grid-template-columns: 1fr 2fr 1fr;
   gap: 2rem; 
 }
 
@@ -616,21 +625,85 @@ header {
 }
 
 /*Post realizados*/
-
+.main--post{
+  background-color: #FFFFFF;
+	border: 0.1rem solid #B7B7B7;
+	border-radius: 0.4rem;
+	padding: 1.5rem;
+	box-shadow: 0.4rem 0.1rem 0.5rem #999999;
+	margin-bottom: 0.5rem;
+  height: 65vh;
+}
+.mainpost--userimg img{
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  float: left;
+}
+.mainpost--username .name{
+  display: inline;
+	padding-left: 0.8rem;
+	font-size: 1.6rem;
+	position: relative;
+	top: 0.4rem;
+}
+.mainpost--username .time{
+  display: inline;
+	padding-left: 0.8rem;
+	font-size: 1.2rem;
+	color: #999;
+}
+.mainpost--post{
+  display: block;
+  margin-top: 2rem;
+}
+.mainpost--post .post{
+  margin: 1.2rem 0.4rem 0.8rem 0.4rem;
+	font-size: 1.4rem;
+	text-align: justify;
+	padding: 0.5rem;
+}
+.mainpost--post .postimg{
+  max-width: 100%;
+	max-height: 25rem;
+	display: block;
+	margin: 0 auto;
+}
+.like--coment{
+  display: inline;
+  float: right;
+}
+.like--img{
+  font-size: 1.8rem;
+	margin-right: 1rem;
+  text-decoration: none;
+  color: #555;
+}
+.coment--post{
+  font-size: 1.8rem;
+	margin-right: 1rem;
+  text-decoration: none;
+  color: #555;
+}
 
 /*Sidebar -Right*/
 .recomendacion{
   background-color: turquoise;
   display: block;
+  margin-top: 2rem;
+}
+.sidebar--right{
+  margin: 0 2rem 2rem 2rem;
 }
 .right-content{
   float: right;
 	width: 26rem;
 	height: 10rem;
+  margin-bottom: 2rem;
   background-color: #FFFFFF;
   border: .1rem solid #B7B7B7;
 	border-radius: .4rem;
-	box-shadow: .2rem .6rem .6rem #999999;
+	box-shadow: .2rem .6rem .6rem #999;
 	padding: 2rem;
 }
 .img--side-right{
@@ -680,7 +753,34 @@ header {
 
 /*----------VISTA WALL - FOOTER------------*/
 footer{
-  background-color: #bb2929;
+  background-color: #333;
+	text-align: center;
+	position: relative;
+	top: -1rem;
+  grid-column: 3 / 4;
+}
+.footer--list ul{
+  padding: 0.5rem;
+	list-style-type: none;
+	text-align: center;
+	margin: 0.5rem;
+	border-radius: 0.5;
+}
+.footer--list ul li{
+	display: inline-block;
+	padding: 0.3rem;
+}
+.footer--list ul li a {
+	text-decoration: underline;
+	color: #615D5E;
+	font-size: 1.3rem;
+}
+.footer--list p{
+	color: #666;
+	text-align: center;
+	font-size: 1.2rem;
+	padding-top: 0.6rem;
+	padding-bottom: 1%;
 }
 
 

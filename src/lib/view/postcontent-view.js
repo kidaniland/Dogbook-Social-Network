@@ -1,19 +1,18 @@
 const postContentView = `
     <div class="main--post">
 
-        <div class="userimg">
+        <div class="mainpost--userimg">
             <img src="./image/avatar-dog.png"/>
         </div>
 
-        <div class="username">				 
-            <p class="name">Sultán</p>
+        <div class="mainpost--username">				 
+            <p class="name">Sultán</p></br>
             <span class="time">2min ago</span>
         </div>
-
-        <div class="post">
+        <div class="mainpost--post">
             <div>
-                <p class="quotes">
-                    Hoy es un excelente día para tomar sol...huesito para seguir mostrándoles mis aventuras.
+                <p class="post">
+                    Hoy es un excelente día para tomar sol! Dame una patita para seguir mostrándoles mis aventuras.
                 </p>
             </div>
             <div>
@@ -22,11 +21,9 @@ const postContentView = `
         </div>
 
         <div class="like--coment">
-            <div class="like-paw">
+            <div class="like--img">
                 <span class="paw--like" id="like1"> 0 </span>
                 <i class="fas fa-paw"></i>
-            </div>
-            <div class="coment-post">
                 <i class="far fa-comment"></i>
             </div>
         </div>

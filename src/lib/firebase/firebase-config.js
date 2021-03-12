@@ -55,15 +55,13 @@ const singIn = (email, password, callback) => {
   auth
     .signInWithEmailAndPassword(email, password) //regresa una promise que podrá identf al usuario ya registrado
     .then (userCredential => {
-      console.log("SE HA LOGEADO")
+      console.log("SE HA LOGEADO", userCredential)
       callback(null, userCredential)
       /*if(userCredential.user.emailVerified === false){
         localStorage.setItem('user', JSON.stringify(
           {
             name: userCredential.user.displayName,
-            email: userCredential.user.email,
-            photo: userCredential.user.photoURL,
-            uid: userCredential.user.uid,
+            email: userCredential.user.email
           }))
           //por ultimos pasamos al muro
           pushState('#/muro')
@@ -93,8 +91,26 @@ const signOut = () => {
     })
 }
 
+const init = (cb) => {
+  const auth = firebase.auth();
+  auth.onAuthStateChanged(user => { //cada vez q se dispare obten user
+    if (user){
+      console.log("USER ACTIVO ES:", user.email)
+      const dataUser = {
+        email: user.email
+      }
+      cb(null, dataUser)
+    }
+    else{
+      console.log('No está logueado>>>>')
+      cb(null, null)
+    }
+  })
+}
+
 export {
   createUser,
   singIn,
-  signOut
+  signOut,
+  init
 }

@@ -1,7 +1,11 @@
-//import { dataUserByEmail } from "../firebase/firestore.js";
+
+import { postContentView } from "../view/postcontent-view.js";
+import { getProfileSummary } from "../view/profileSummary-view.js";
 import { wallContent } from "../view/wall-view.js";
 
-const wallView = () => {  
+
+
+const wallView = (user) => {  
 
     const wallElement = document.createElement('div');
     wallElement.setAttribute('class', 'wall-view');
@@ -12,44 +16,18 @@ const wallView = () => {
 
     
     //SIDEBAR LEFT: resumen de perfil
-    const imgProfile = wallElement.querySelector('#avatarUser'); //la misma para Make Post
-    const nameUser = wallElement.querySelector('#username'); //tambien para make post y post view
-    const nameHuman = wallElement.querySelector('#sideName');
-    const countryUser = wallElement.querySelector('#sideCountry');
-      
+    const profileSummary = wallElement.querySelector('.perfil--resumen');
+    profileSummary.appendChild(getProfileSummary(user)); 
 
-    //si hay foto la colocamos, sino se coloca la que es por default
-    const user = JSON.parse(localStorage.getItem('user'));
-    /*
-    if (user.photo === null) {
-        imgProfile.setAttribute('src', './image/avatar.png'); 
-    }
-    else{
-        imgProfile.setAttribute('src', user.photo);
-    }
-    */
-    //encontrando usuario por email
-    //dataUserByEmail(user.email)
+    //CONTENIDO CENTRAl: hacer un post
+
+    //CONTENIDO CENTRAl: post realizados
+    const postContentinMain = wallElement.querySelector('.post--content');
+    postContentinMain.innerHTML += postContentView();
 
 
-
-    //MAKE A POST: recogiendo los datos
-    /* 
-    const makePost = wallContent.querySelector('#postbarImg');
-    makePost.addEventListener('click', () => {
-        console.log("enviandooooooo");
-    }) 
-    */
-
-
-    //para pintar los post
-    /*
-    const postList = document.querySelector('#post')
-    */
-    //listar usuarios autenticados basado en solo los cambios
-    
-
-
-return wallElement
+    return wallElement
 }
+
+
 export { wallView }

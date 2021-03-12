@@ -1,29 +1,11 @@
-//import { headerView } from "./header-view.js";
 import { footerView } from "./footer-view.js";
-import { postContentView } from "./postcontent-view.js";
-
 
 export const wallContent = `
 
     <div class ="wall--content">
 
         <div class="perfil--resumen">
-            <div class="sidebar--left">
-
-                <img class="img--side" id="avatarUser">
-                <p class="text--side">
-                    Soy: </br> 
-                    <span class="span--side" id="username"></span>
-                </p>
-                <p class="text--side">
-                    Mi humano se llama: </br>
-                    <span class="span--side" id="sideName"></span>
-                </p>
-                <p class="text--side" id="sideCountry"></p>
-
-                <a href="#/perfil" class="link--side "id="alProfile">Editar perfíl</a>
-
-            </div>
+            
         </div>
 
 
@@ -59,11 +41,9 @@ export const wallContent = `
                         </button>
                     </div>
                 </div>
-
-                <div class="post--content">
-                    ${postContentView}
-                </div>
             </div>
+
+            <!-- DESDE POSTCONTENT-VIEW-->
 
         </div>
 
@@ -99,5 +79,21 @@ export const wallContent = `
     </div>      
 `;
 
+
+/*
+<img src="" class="img--side" id="avatarUser">
+            <p class="text--side">
+                Soy: </br> 
+                <span class="span--side" id="username"></span>
+            </p>
+            <p class="text--side">
+                Mi humano se llama: </br>
+                <span class="span--side" id="sideName"></span>
+            </p>
+            <p class="text--side" id="sideCountry">
+            <i class="fas fa-map-marker-alt"></i></p>
+
+            <a href="#/perfil" class="link--side "id="alProfile">Editar perfíl</a>
+*/
 
 

@@ -1,3 +1,5 @@
+//import { getProfileSummary } from "../view/profileSummary-view.js";
+
 //EL DATABASE ESTA HABILITADO EN MODO DE PRUEBA
 export const firestore = firebase.firestore();
 // Almacena datos de cada usuario
@@ -15,51 +17,54 @@ const registerUser = (user, cb) => {
         })
 };
 
-//ubicamos al usuario por su email
-//const dataUserByEmail = (email) => { 
-  const auth = firebase.auth();
-  auth.onAuthStateChanged(user => { //cada vez q se dispare obten user
-    if (user){
-      console.log("XXXXXXXXXXXX USER", user.email)
-      firestore.collection('users')
-        .doc(user.email)
-        .get() //obten los datos
-        .then((doc) => {
-          console.log('Muestra lo capturado-->', doc.data()) //snapshot es un obj q muestra datos cambiando
-          //setupPost(snapshot.docs)
-        })
-    }
-    else{
-      console.log('No está logueado>>>>')
-    }
-  })
-//}
+
 
 /*
-//onAuthStateChanged: este evento se tiene q disparar cada vez q un usuario se loguea o sale
-//Si el usuario está autenticado, quiero mostrar los datos de:
-const dataPost = () => {
-  const auth = firebase.auth();
-  auth
-  .onAuthStateChanged(user => { //cada vez q se dispare obten user
-    if (user){
-      firestore.collection('post')
-        .get() //obten los datos
-        .then((snapshot) => {
-          console.log('Muestra lo capturado-->', snapshot.docs) //snapshot es un obj q muestra datos cambiando
-          setupPost(snapshot.docs)
-        })
-    }
-    else{
-      console.log('No está logueado>>>>')
-      setupPost([])
-
-    }
-  })
-}
+  const dataUserByEmail = (email) => {
+    firestore.collection('users')
+      .where("email", "===", email)
+      .get() //obten los datos
+      .then( doc => {
+        if (doc.exists) {
+          getProfileSummary(doc.data())
+        }
+        else{
+          console.log("Usuario no encontrado");
+        }
+      })
+      .catch(error => {
+        console.error("Error dataUserEmail", error);
+      })
+  }
 */
 
+
+
+
+//onAuthStateChanged: este evento se tiene q disparar cada vez q un usuario se loguea o sale
+//Si el usuario está autenticado, quiero mostrar los datos de:
+/*
+auth.onAuthStateChanged(user => { 
+  if (user){
+    firestore.collection('post')
+      .get() //obten los datos
+      .then((snapshot) => {
+        console.log('Muestra lo capturado en POST-->', snapshot.docs) //snapshot es un obj q muestra datos cambiando
+        postContentView(snapshot.docs)
+      })
+      .catch(error =>{
+        console.error("Error", error);
+      })
+  }
+  else{
+    console.log('No está logueado>>>>')
+    setupPost([])
+  }
+})
+*/
+
+
 export {
-  registerUser
+  registerUser,
   //dataUserByEmail
 }

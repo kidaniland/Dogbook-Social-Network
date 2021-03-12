@@ -515,6 +515,7 @@ header {
 .img--side{
   border-radius: 50%;
   width: 50%;
+  height: 12rem;
   margin-left: 6rem;
 }
 .text--side{

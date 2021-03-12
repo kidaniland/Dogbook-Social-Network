@@ -7,31 +7,31 @@ import { profileView } from './view/profile-view.js';
 //EL RAUTER TIENE QUE TENER ACCESO A LA INFORMACION DE LA API(O FIREBASE)
 
 //Condicion hash para pantalla de inicio, si este es " " o null entonces w.l.h= #/
-export const hashCondition = (hash) => {
+export const hashCondition = (hash, user) => {
     //console.log('HAS --ZZZ>', hash)
-    if (hash === ''){
+    if (hash === '' || !user){
         return router('#/');
     }
-    return router(hash);
+    return router(hash, user);
 }
 
 //muestra vistas en función del hash que ejecuta la funcion pushState
-export const router = (hash) => {
+export const router = (hash, user) => {
     const mainContainers = document.getElementById('root');
     mainContainers.innerHTML = '';
   
     switch (hash) {
         case '#/':
-            return mainContainers.appendChild(loginView()); 
+            return mainContainers.appendChild(loginView(user)); 
         break;
         case '#/registro':
-            return mainContainers.appendChild(registerView()); 
+            return mainContainers.appendChild(registerView(user)); 
         break;
         case '#/muro':
-            return mainContainers.appendChild(wallView());
+            return mainContainers.appendChild(wallView(user));
         break;
         case '#/perfil':
-            return mainContainers.appendChild(profileView());
+            return mainContainers.appendChild(profileView(user));
         break;
         default:
             mainContainers.innerHTML = '<h2>No existe</h2>';

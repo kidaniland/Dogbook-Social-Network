@@ -420,6 +420,13 @@ header {
   padding: 1rem 2rem;
   text-decoration: none;
   font-size: 1.7rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: rgb(175, 174, 174);
+}
+.nav--list .nav--item .nav--link:hover{
+  color:  #32be8f;
 }
 .nav--list .nav--item .nav--link .nav--icon{
   display: block;
@@ -598,14 +605,26 @@ header {
 	box-sizing: border-box;
 }
 .make--postbar{
-  padding: 1rem 1rem 1rem 1rem;
+  padding: 3rem 1rem 1rem 1rem;
+  margin-top: -1rem
+}
+.make--postbar-label{
+  display: inline;
+  width: 5rem;
+  height: 3rem;
+  float: right;
+  margin: -3rem .5rem .5rem .5rem;
+	border: none;
+	outline: 0;
+  cursor: pointer;
+  font-size: 3.4rem;
+  color: #333;
+}
+.make--postbar-label:hover{
+  color: #32be8f;
 }
 .make--postbar #chooseImg{
-  width: 9rem;
-	height: 2.8rem;
-	font-size: 1.2rem;
-	position:absolute;
-	opacity: 0;
+  display: none;
 }
 .postbar-bttn{
   display: inline;
@@ -613,9 +632,7 @@ header {
   height: 3rem;
   float: right;
   margin: -3rem .5rem .5rem .5rem;
-	background-color: white;
-	border: none;
-	border-radius: .4rem;
+	box-decoration-break: none;
 	outline: 0;
   cursor: pointer;
   font-size: 3rem;
@@ -689,7 +706,7 @@ header {
 
 /*Sidebar -Right*/
 .recomendacion{
-  background-color: turquoise;
+  /*background-color: turquoise;*/
   display: block;
   margin-top: 2rem;
 }

@@ -21,9 +21,41 @@ const wallView = (user) => {
 
     //CONTENIDO CENTRAl: hacer un post
 
+    /*elementos*/
+    const img = wallElement.querySelector('#avatarUser');
+    const userDog = wallElement.querySelector('#username');
+    const inputFileImg = wallElement.querySelector('#chooseImg');
+
+    //Previsualizar la imagen a postear
+    inputFileImg.addEventListener('change', (e) => {
+        console.log('Target file -->', e.target.files[0])
+
+        let reader= new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+
+        reader.onload= function(){
+            let preview  = wallElement.querySelector('#imagenPreview');
+            let imgElement = document.createElement('img');
+                imgElement.src = reader.result;
+                imgElement.style.width ="20rem";
+                preview.innerHTML='';
+                preview.append(imgElement);
+        }
+    })
+
+    //Pveto boton enviar
+    const sendPost = wallElement.querySelector('.postbar-bttn');
+    sendPost.addEventListener('click', () => {
+        console.log("FUNCIONO");
+        const textarea = wallElement.querySelector('#makePost').value;
+        console.log("esto tiene textArea", textarea);
+
+    })
+
+
+ 
     //CONTENIDO CENTRAl: post realizados
-    const postContentinMain = wallElement.querySelector('.post--content');
-    postContentinMain.innerHTML += postContentView();
+   
 
 
     return wallElement

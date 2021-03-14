@@ -24,23 +24,21 @@ export const wallContent = `
                     <textarea id="makePost" placeholder="¿Qué estás oliendo?, envía un imágen o ladrido."></textarea>
                 </div>
 
-                <div class="make--post-load">
-                    <img id="load2" class="post-img" src=" ">
+                <div class="make--postbar">
+
+                    <div type="button" class="postbar-bttn">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+
+                    <label for="chooseImg" class="make--postbar-label">
+                        <i class="far fa-image" id="imgbttn"></i>   
+                    </label>
+                    <input type="file" accept="images/*" name="image" id="chooseImg">
+
                 </div>
 
-                <div id= "visorArchivo"></div>
-                
-                <div>
-                    <div class="make--postbar">
-                        <input type="file" accept="images/*" id="chooseImg">
-                        <button type="button" id="likepost" class="postbar-bttn">
-                            <i class="fas fa-paper-plane" id="postbarImg"></i>
-                        </button>
-                        <button type="button" class="postbar-bttn" id="imgbttn">
-                            <i class="far fa-image" id="postbarImg"></i>
-                        </button>
-                    </div>
-                </div>
+                <div class="make--post-imagenPreview" id="imagenPreview"></div>
+
             </div>
 
             <!-- DESDE POSTCONTENT-VIEW-->
@@ -79,21 +77,5 @@ export const wallContent = `
     </div>      
 `;
 
-
-/*
-<img src="" class="img--side" id="avatarUser">
-            <p class="text--side">
-                Soy: </br> 
-                <span class="span--side" id="username"></span>
-            </p>
-            <p class="text--side">
-                Mi humano se llama: </br>
-                <span class="span--side" id="sideName"></span>
-            </p>
-            <p class="text--side" id="sideCountry">
-            <i class="fas fa-map-marker-alt"></i></p>
-
-            <a href="#/perfil" class="link--side "id="alProfile">Editar perfíl</a>
-*/
 
 

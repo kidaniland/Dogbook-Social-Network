@@ -13,11 +13,11 @@ export const wallContent = `
 
             <div class="make--post">	
                 <div class="make--post-img">
-                    <img class="make--post-img-user" id="avatarUser" src="./image/avatar.png">
+                    <img class="make--post-img-user" id="userFoto">
                 </div>
 
                 <div class="make--post-username">				 
-                    <p class="make--post-name" id="username">Firulais</p>
+                    <p class="make--post-name" id="userDog"></p>
                 </div>
 
                 <div class="make--post-post">
@@ -40,9 +40,9 @@ export const wallContent = `
                 <div class="make--post-imagenPreview" id="imagenPreview"></div>
 
             </div>
-
+            <div class="view--post">
             <!-- DESDE POSTCONTENT-VIEW-->
-
+            </div>
         </div>
 
 

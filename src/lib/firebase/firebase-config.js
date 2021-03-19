@@ -14,6 +14,10 @@ const firebaseConfig = {
 // Inicializa Firebase
 firebase.initializeApp(firebaseConfig);
 
+
+//FIREBASE STORAGE para el almacenamiento de las imagenes
+//var storage = firebase.app().storage("gs://social-network-17cd8.appspot.com/");
+
 //Creando Usuario con Email y Passwor
 const createUser = (email, password, cb) => {
   const auth = firebase.auth();
@@ -93,15 +97,25 @@ const signOut = () => {
 
 const init = (cb) => {
   const auth = firebase.auth();
+  const firestore = firebase.firestore();
+
   auth.onAuthStateChanged(user => { //cada vez q se dispare obten user
-    if (user){
+    if (user) {
       console.log("USER ACTIVO ES:", user.email)
-      const dataUser = {
-        email: user.email
-      }
-      cb(null, dataUser)
+      firestore.collection('users')
+        .doc(user.email)
+        .get() //obten los datos
+        .then((doc) => {
+          let userD = doc.data();
+          const dataUser = {
+            email: userD.email,
+            user: userD.user,
+            photo: userD.photo
+          }
+          cb(null, dataUser)
+        })
     }
-    else{
+    else {
       console.log('No está logueado>>>>')
       cb(null, null)
     }

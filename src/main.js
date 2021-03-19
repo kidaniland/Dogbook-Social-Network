@@ -4,7 +4,7 @@ import { init, signOut } from './lib/firebase/firebase-config.js';
 
 window.addEventListener('load', () => {
   init((err, user) => {
-    console.log('MAIN3 -->>', user);
+    //console.log('MAIN -->>', user);
 
     hashCondition(window.location.hash, user);
 

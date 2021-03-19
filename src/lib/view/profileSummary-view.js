@@ -1,7 +1,7 @@
 //función para obtener la lista de datos para hacer el resumen del perfil
 
 export const getProfileSummary = (user) => {
-    console.log("LLEGA a doc-->", user);
+    //console.log("LLEGA a doc-->", user);
 
     const sidebarLeft = document.createElement('div'); 
     sidebarLeft.setAttribute('class', 'sidebar--left');
@@ -33,7 +33,7 @@ export const getProfileSummary = (user) => {
       .doc(user.email)
       .get() //obten los datos
       .then((doc) => {
-        console.log('Muestra lo capturado USER-->', doc.data()) //snapshot es un obj q muestra datos cambiando
+        //console.log('Muestra lo capturado USER-->', doc.data()) //snapshot es un obj q muestra datos cambiando
         const userData = doc.data();
         img.setAttribute('src', userData.photo)
         sideUser.innerHTML = userData.user;

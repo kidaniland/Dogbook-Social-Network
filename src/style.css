@@ -379,6 +379,7 @@ header {
   box-sizing: border-box;
   border-radius: 0.4rem;
   box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, .2);
+  z-index: 1;
 }
 .nav{
   display: block;
@@ -556,7 +557,6 @@ header {
 
 /*Contenido central POST*/
 .post--content{
-  background-color: violet;
   float: left;
   width: 57rem;
   margin-top: 2rem;
@@ -641,16 +641,32 @@ header {
 .postbar-bttn:hover{
   color: #32be8f;
 }
+.make--post-imagenPreview{
+  display: flex;
+  background-color: greenyellow;
+}
+.make--post-imagenPreview #uploader{
+  appearance: none;
+  width: 50%;
+  height: 2rem;
+  margin-top: 10rem;
+  background-color: #32be8f;
+  border: 0.3rem;
+}
+
 
 /*Post realizados*/
-.main--post{
+.view--post{
+  background-color: greenyellow;
+}
+.cada--post{
   background-color: #FFFFFF;
 	border: 0.1rem solid #B7B7B7;
 	border-radius: 0.4rem;
 	padding: 1.5rem;
 	box-shadow: 0.4rem 0.1rem 0.5rem #999999;
 	margin-bottom: 0.5rem;
-  height: 65vh;
+  height: 100vh;
 }
 .mainpost--userimg img{
   width: 6rem;

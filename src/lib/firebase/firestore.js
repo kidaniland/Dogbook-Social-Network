@@ -19,28 +19,9 @@ const registerUser = (user, cb) => {
         })
 };
 
-/*
-const getDataUserbyEmail = (user,cb) =>{
-  let userData;
-  firestore.collection('users')
-    .doc(user.email)
-    .get() //obten los datos
-    .then((doc) => {
-      console.log("Muestra lo capturado USER-->", doc.data()) //snapshot es un obj q muestra datos cambiando
-      userData = doc.data();
-    })
-    .catch(error => {
-      console.error("Error ", error);
-  })
-  return userData
-}
-*/
-
-
-
 //Almacena post de cada usuario
 const registerPost = (post, cb) => {
-  console.log("llega a registerPost--->", post);
+  //console.log("llega a registerPost--->", post);
   return firestore.collection("posts")
       .doc(post.user)
       .set(post)
@@ -56,15 +37,16 @@ const registerPost = (post, cb) => {
 
 //Recupera el todos los post almacenados
 const allDataPost = (user, cb) => {
-  console.log("llega a allDataPost", user)
+  //console.log("llega a allDataPost", user)
   if (user) {
-    return firestore.collection("posts")
+    return firestore.collection('posts')
+      .orderBy('tiempo', 'desc')
       .get()
       .then((snapshot) => {
         console.log("LLEGO DE collection post-->", snapshot.docs)
         const allPost = snapshot.docs;
         cb(null, snapshot.docs)
-          console.log("snapshot", allPost);
+        console.log("snapshot", allPost);
       })
       .catch(error => {
         console.error("Error ", error);
@@ -77,10 +59,29 @@ const allDataPost = (user, cb) => {
 
 }
 
+const addPawLike = (postId, cb) => {
+  console.log('esto llega como postID-->', postId);
+  if(postId){
+    return firestore.collection('posts')
+      .doc(postId)
+      .update({
+        "pawLike": firebase.firestore.FieldValue.increment(1)
+      })
+      .then(() => {
+        console.log("INFO actualizada")
+        cb()
+      })
+      .catch(error => {
+        console.error("Error ", error);
+        cb(error)
+      })
+  }
+};
 
 export {
   registerUser,
   registerPost,
-  allDataPost
+  allDataPost,
+  addPawLike
   //getDataUserbyEmail
 }

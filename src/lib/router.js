@@ -9,7 +9,7 @@ import { profileView } from './view/profile-view.js';
 //Condicion hash para pantalla de inicio, si este es " " o null entonces w.l.h= #/
 export const hashCondition = (hash, user) => {
     //console.log('HAS --ZZZ>', hash)
-    if (hash === '' || !user){
+    if (hash === '' && hash !== '#/registro' && !user){
         return router('#/');
     }
     return router(hash, user);

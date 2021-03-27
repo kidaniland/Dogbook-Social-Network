@@ -78,3 +78,19 @@ export const validatorLogin = (userValue, passwordValue) => {
       return false;
   }
 }
+
+export const previewImgProfile = (imgFile) => {
+  let reader = new FileReader();
+  reader.readAsDataURL(imgFile);
+
+  reader.onload = function () {
+    let preview = document.querySelector('.previewImg');
+
+    let imgElement = document.createElement('img');
+    imgElement.src = reader.result;
+    imgElement.style.width = "20rem";
+
+    preview.innerHTML = '';
+    preview.appendChild(imgElement);
+  }
+}

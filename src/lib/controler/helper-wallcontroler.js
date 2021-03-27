@@ -8,15 +8,15 @@ export const previewImg = (imgfile) => {
         let imgElement = document.createElement('img');
         imgElement.src = reader.result;
         imgElement.style.width = "20rem";
-        
+        /*
         let progressElement = document.createElement('progress');
         progressElement.setAttribute('value', 0);
         progressElement.setAttribute('max', 100);
         progressElement.setAttribute('id', 'uploader');
-
+        */
         preview.innerHTML = '';
         preview.appendChild(imgElement);
-        preview.appendChild(progressElement);
+        //preview.appendChild(progressElement);
     }
 
 }

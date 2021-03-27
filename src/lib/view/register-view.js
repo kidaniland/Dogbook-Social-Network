@@ -1,7 +1,7 @@
 import { createUser } from '../firebase/firebase-config.js';
 import { registerUser } from '../firebase/firestore.js';
 import { pushState} from '../router.js';
-import { showMessage, validatePassword2 } from '../validator/validate-input.js';
+import { previewImgProfile, showMessage, validatePassword2 } from '../validator/validate-input.js';
 import { validateRecordField } from '../validator/validate-input.js';
 
 
@@ -118,6 +118,17 @@ const registerView = () => {
                     </p>
                 </div>
             </div>
+
+        <!--Grupo Imagen de perfíl-->
+            <div class="formulario--grupo" id="grupo--imgPerfil">
+                <label for="imgPerfil" class="formulario--label">Foto</label>
+                <div class="formulario--grupo-input">
+                    <label for="imgProfile" class="label--input">
+                        <i class="fas fa-file-image"></i>   Cargar imagen de perfíl</label>
+                    <input type="file" accept="images/*" name="image" id="imgProfile">
+                    <div class="previewImg"></div>
+                </div>
+            </div>
     
         <!--Terminos y condiciones-->
             <div class="formulario--grupo formulario--grupo-terminos" id="grupo--terminos">
@@ -163,6 +174,7 @@ const registerView = () => {
     const inputPassword1 = registerElement.querySelector('#password');
     const inputPassword2 = registerElement.querySelector('#password2');
     const terminos = registerElement.querySelector('#terminos');
+    const inputImgProfile = registerElement.querySelector('#imgProfile');
 
     const regularExpression = {
         nombre: /^[a-zA-ZÀ-ÿ\s]{3,40}$/, // Letras y espacios, pueden llevar acentos.
@@ -229,6 +241,30 @@ const registerView = () => {
         input.addEventListener('blur', validateForm);
     });
 
+    //evento cargar imagen de perfíl
+    let urlUploadedImgProfile = ''; 
+    inputImgProfile.addEventListener('change', (e) => {
+        console.log('Target file -->', e.target.files[0])
+        //obtener el archivo
+        let imgFile = e.target.files[0];
+        previewImgProfile(imgFile);
+        //crear un referencia de almacenamiento (carpeta, nombre de archivo)
+        let storageRef = firebase.storage().ref('img_post/' + imgFile.name);
+        console.log('------->storageRef de la imagen de perfíl', storageRef);
+
+       //obtengo de esa imagen cargada su URL
+        storageRef.put(imgFile)
+        .then((data) => {
+            storageRef.getDownloadURL().then((url) => { 
+                //console.log('Sanap ->', data, url, typeof(url));
+                urlUploadedImgProfile = url;
+                
+            })
+        });
+        
+    })
+        
+
     //evento SUBMIT
     formRegister.addEventListener('submit', (e) => {
         e.preventDefault() //eliminar al final...
@@ -251,7 +287,8 @@ const registerView = () => {
                     birth: birth.value,
                     nameH: nameHuman.value,
                     country: country.value,
-                    email: email.value
+                    email: email.value,
+                    photo: urlUploadedImgProfile
                 }, (error) => {
                     if (error){
                         console.log("ERROR ", error)

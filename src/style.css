@@ -244,6 +244,46 @@ a:hover{
   .formulario--grupo-input {
     position: relative;
   }
+  .formulario--grupo-input select{
+    width: 100%;
+    height: 4.5rem;
+    padding: 1rem;
+    font-size: 1.4rem;
+    color: #333;
+    border: 0.3rem solid transparent;
+    border-radius: 0.3rem;
+
+  }
+  .formulario--grupo-input #bDayDog{
+    width: 100%;
+    height: 4.5rem;
+    padding: 1rem;
+    font-size: 2rem;
+    color: #333;
+    border: 0.3rem solid transparent;
+    border-radius: 0.3rem;
+
+  }
+  .formulario--grupo-input #imgProfile{
+    display: none;
+  }
+  .formulario--grupo-input .label--input{
+    color: white;
+    width: 100%;
+    height: 4.5rem;
+    padding: 1rem;
+    font-size: 1.5rem;
+    background-color: orange;
+    position: absolute;
+    border: 0.3rem solid transparent;
+    border-radius: 0.3rem;
+    cursor: pointer;
+  }
+  .formulario--grupo-input .label--input i{
+    text-decoration: none;
+    margin-right: 1rem;
+    font-size: 2rem;
+  }
   .formulario--input {
     width: 100%;
     background: #fff;
@@ -362,6 +402,7 @@ a:hover{
     .formulario--mensaje,
     .formulario--grupo-btn-enviar{
       grid-column: span 1; /*con esto hacemos que el elemento abarque 1 colum*/
+      margin-top: 3rem;
     }
     .formulario--btn {
       width: 100%;
@@ -510,7 +551,7 @@ header {
   width: 25rem;
 	height: 40rem;
   margin: 2rem;
-	background-color: yellow;
+	background-color: #38d39f;
 	float:left;
   box-sizing: border-box;
   border-radius: 0.4rem;
@@ -563,13 +604,13 @@ header {
 }
 /*crea un post*/
 .make--post{
-  background-color: #d2faed ;
+  background-color: #333 ;
   height: 22rem;
 	border: 0.1rem solid #B7B7B7;
 	border-radius: 0.4rem;
 	padding: 1.5rem;
-	margin-bottom: 2rem;
-	box-shadow: .4rem .1rem .5rem #999;
+	margin-bottom: 4rem;
+	box-shadow: .4rem .1rem .5rem rgb(199, 199, 199);
 }
 .make--post-img{
 	float: left;
@@ -585,6 +626,7 @@ header {
 	font-size: 1.6rem;
 	position: relative;
 	top: 1.4rem;
+  color: #D1D1D1;
 }
 .make--post-post{
   margin: 1.2rem .4rem .8rem .4rem;
@@ -618,7 +660,7 @@ header {
 	outline: 0;
   cursor: pointer;
   font-size: 3.4rem;
-  color: #333;
+  color:#D1D1D1;
 }
 .make--postbar-label:hover{
   color: #32be8f;
@@ -636,14 +678,23 @@ header {
 	outline: 0;
   cursor: pointer;
   font-size: 3rem;
-  color: #333;
+  color: #D1D1D1;
 }
 .postbar-bttn:hover{
   color: #32be8f;
 }
 .make--post-imagenPreview{
-  display: flex;
-  background-color: greenyellow;
+  display: none;
+  background-color: #d2faed;
+  margin-top: -2rem;
+  margin-bottom: 2rem;
+  border-style: dashed;
+  border-color: darkgray;
+}
+.make--post-imagenPreview img{
+  padding: 1rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 .make--post-imagenPreview #uploader{
   appearance: none;
@@ -657,7 +708,12 @@ header {
 
 /*Post realizados*/
 .view--post{
-  background-color: greenyellow;
+ /* background-color: greenyellow;*/
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+.view--post::-webkit-scrollbar{
+  display: none;
 }
 .cada--post{
   background-color: #FFFFFF;
@@ -665,8 +721,8 @@ header {
 	border-radius: 0.4rem;
 	padding: 1.5rem;
 	box-shadow: 0.4rem 0.1rem 0.5rem #999999;
-	margin-bottom: 0.5rem;
-  height: 100vh;
+	margin-bottom: 1.5rem;
+  height: auto;
 }
 .mainpost--userimg img{
   width: 6rem;
@@ -709,9 +765,13 @@ header {
 }
 .like--img{
   font-size: 1.8rem;
-	margin-right: 1rem;
+	margin-left: 45rem;
   text-decoration: none;
   color: #555;
+}
+.like--img #pawBtn{
+  color:  #555;
+  cursor: pointer;
 }
 .coment--post{
   font-size: 1.8rem;
@@ -772,25 +832,13 @@ header {
 	border-radius: 0.4rem;
 }
 
-/*Mediaqueries - WALL*/
-@media (max-width: 768px){
-  .wall--content {
-    grid-template-columns: 1fr;
-  }
-  .perfil--resumen{
-    display:none;
-  }
-  .recomendacion{
-    display:none;
-  }
-}
-
 /*----------VISTA WALL - FOOTER------------*/
 footer{
   background-color: #333;
 	text-align: center;
 	position: relative;
-	top: -1rem;
+	top: -283rem;
+  margin: 2rem;
   grid-column: 3 / 4;
 }
 .footer--list ul{
@@ -816,6 +864,32 @@ footer{
 	padding-top: 0.6rem;
 	padding-bottom: 1%;
 }
+
+
+/*Mediaqueries - WALL*/
+@media (max-width: 736px){
+  .wall--content {
+    grid-template-columns: 1fr;
+  }
+  .make--post{
+    height: 22rem;
+    width: 66%;
+    padding: 0.5rem;
+  }
+  .postbar-bttn{
+    font-size: 2rem;
+  }
+  .perfil--resumen{
+    display:none;
+  }
+  .recomendacion{
+    display:none;
+  }
+  footer{
+    display: none;
+  }
+}
+
 
 
 

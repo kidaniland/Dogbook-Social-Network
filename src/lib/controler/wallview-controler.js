@@ -61,6 +61,7 @@ const wallView = (user) => {
 
     //Previsualizar la imagen a postear
     inputFileImg.addEventListener('change', (e) => {
+        wallElement.querySelector('#imagenPreview').style.display = 'flex';
         console.log('Target file -->', e.target.files[0])
         //obtener el archivo
         let imgFile = e.target.files[0];
@@ -77,23 +78,49 @@ const wallView = (user) => {
         storageRef.put(imgFile)
         .then((data) => {
             storageRef.getDownloadURL().then((url) => { 
-                console.log('Sanap ->', data, url, typeof(url));
+                //console.log('Sanap ->', data, url, typeof(url));
                 urlUploadedImg = url;
                 
             })
-
-            // data.ref.getDownloadUrl().then(function(download_url) {
-            //     console.log('File available at', downloadURL)
-            // });
         });
         
     });
 
     sendPostbtn.addEventListener('click', () => {
-        console.log("FUNCIONO y la url es-->", urlUploadedImg);
+        //console.log("FUNCIONO y la url es-->", urlUploadedImg);
         let date = new Date().toLocaleString();
+        wallElement.querySelector('#imagenPreview').style.display = 'none';
 
-        if (urlUploadedImg !== '') {
+        if (urlUploadedImg === '') {
+            registerPost({
+                autor: user.user,
+                comentarios: 0,
+                imageProfile: user.photo,
+                pawLike: 0,
+                post: textarea.value,
+                postImg: '',
+                tiempo: date
+            }, (error) => {
+                if (error) {
+                    console.log("ERROR ", error)
+                }
+                else {
+                    //mensaje de exito
+                    console.log('Todo salió bien')
+                    textarea.value = '';
+                    //imprimir post
+                    allDataPost(user, (error, snapshot) => {
+                        if(error){
+                            console.error('Error', error)
+                        }
+                        else{
+                            postView.appendChild(postContentView(snapshot))
+                        }
+                    });
+                }
+            });
+        }
+        else{
             registerPost({
                 autor: user.user,
                 comentarios: 0,
@@ -110,14 +137,18 @@ const wallView = (user) => {
                     //mensaje de exito
                     console.log('Todo salió bien')
                     textarea.value = '';
-                    //imprimir post
-                    let printPost = wallElement.querySelector('.view--post');
-                    //printPost.appendChild(postToPrint())
-                    
+                    allDataPost(user, (error, snapshot) => {
+                        if(error){
+                            console.error('Error', error)
+                        }
+                        else{
+                            postView.appendChild(postContentView(snapshot))
+                        }
+                    });
                 }
             });
-
         }
+        
     })
 
 

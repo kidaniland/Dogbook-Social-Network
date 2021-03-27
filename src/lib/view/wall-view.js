@@ -36,10 +36,9 @@ export const wallContent = `
                     <input type="file" accept="images/*" name="image" id="chooseImg">
 
                 </div>
-
-                <div class="make--post-imagenPreview" id="imagenPreview"></div>
-
+                
             </div>
+            <div class="make--post-imagenPreview" id="imagenPreview"></div>
             <div class="view--post">
             <!-- DESDE POSTCONTENT-VIEW-->
             </div>

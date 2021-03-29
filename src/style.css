@@ -888,6 +888,7 @@ footer{
     height: 19rem;
     width: 67%;
     padding: 0.5rem;
+    margin-bottom: 1rem;
   }
   .make--post-img-user{
     width: 4rem;
@@ -910,7 +911,7 @@ footer{
     display:none;
   }
   .main--post{
-    height: 22rem;
+    height: 50rem;
     width: 66%;
     padding: 0.5rem;
   }

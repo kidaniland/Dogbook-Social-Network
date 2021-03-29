@@ -28,7 +28,7 @@ const postContentView = (data) => {
                     <div>
                         <img class="postimg" src=${post.postImg}></img>
                     </div>
-
+                    <hr class="barra">
                     <div class="like--img">
                         <span class="paw--like" id="like">${post.pawLike}</span>
                         <i class="fas fa-paw" id="pawBtn" post-id=${postId}></i>

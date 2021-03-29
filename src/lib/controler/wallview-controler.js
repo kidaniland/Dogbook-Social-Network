@@ -142,7 +142,14 @@ const wallView = (user) => {
                             console.error('Error', error)
                         }
                         else{
-                            postView.appendChild(postContentView(snapshot))
+                            allDataPost(user, (error, snapshot) => {
+                                if(error){
+                                    console.error('Error', error)
+                                }
+                                else{
+                                    postView.appendChild(postContentView(snapshot))
+                                }
+                            });
                         }
                     });
                 }

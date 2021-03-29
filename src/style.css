@@ -707,12 +707,15 @@ header {
 
 
 /*Post realizados*/
-.view--post{
- /* background-color: greenyellow;*/
-  overflow-y: scroll;
-  scrollbar-width: none;
+/*.view--post{
+  background-color: greenyellow;
+}*/
+.main--post{
+  overflow: auto;
+  max-height: 60rem;
 }
-.view--post::-webkit-scrollbar{
+
+.main--post::-webkit-scrollbar{
   display: none;
 }
 .cada--post{
@@ -757,7 +760,12 @@ header {
   max-width: 100%;
 	max-height: 25rem;
 	display: block;
-	margin: 0 auto;
+	margin: 10px auto;
+}
+.barra{
+  opacity: .4;
+	color: #38d39f;
+	margin: 1.5rem 1rem;
 }
 .like--coment{
   display: inline;
@@ -765,7 +773,7 @@ header {
 }
 .like--img{
   font-size: 1.8rem;
-	margin-left: 45rem;
+	margin-left: 44rem;
   text-decoration: none;
   color: #555;
 }
@@ -871,16 +879,46 @@ footer{
   .wall--content {
     grid-template-columns: 1fr;
   }
+  .post--content{
+    float: left;
+    width: 55rem;
+    margin-top: 0rem;
+  }
   .make--post{
+    height: 19rem;
+    width: 67%;
+    padding: 0.5rem;
+  }
+  .make--post-img-user{
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+  }
+  .make--post-name{
+    display: inline;
+    padding-left: 1.4rem;
+    font-size: 1.3rem;
+    position: relative;
+    top: 1.4rem;
+    color: #D1D1D1;
+  }
+  .postbar-bttn i{
+    font-size: 2.5rem;
+    margin-top: 1rem;
+  }
+  .perfil--resumen{
+    display:none;
+  }
+  .main--post{
     height: 22rem;
     width: 66%;
     padding: 0.5rem;
   }
-  .postbar-bttn{
-    font-size: 2rem;
-  }
-  .perfil--resumen{
-    display:none;
+  .like--img{
+    font-size: 1.8rem;
+    margin-left: 25rem;
+    text-decoration: none;
+    color: #555;
   }
   .recomendacion{
     display:none;

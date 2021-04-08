@@ -35,7 +35,7 @@ export const progressBar = (storageRef, imgFile, uploader) => {
             console.error('Error', err);
         },
         function complete() {
-            //console.log(arguments)
+            
             task.snapshot.ref.getDownloadUrl()
                 .then(function (download_url) {
                     console.log('File available at', downloadURL)

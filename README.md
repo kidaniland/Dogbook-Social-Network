@@ -146,7 +146,7 @@ Historia 5:
 ## 5. Diseño de la Interfaz de Usuario
 
 ### 5.1 Prototipo de baja fidelidad
-![](https://live.staticflickr.com/65535/51104700570_ea2ab72856_z.jpg)
+![]()
 
 ### 5.2 Inicio
 ![](https://live.staticflickr.com/65535/51103831408_8566cc5570.jpg)

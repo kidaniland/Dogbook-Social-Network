@@ -1,4 +1,4 @@
-![javascript](https://img.icons8.com/color/48/000000/javascript.png) ![HTML](https://img.icons8.com/color/48/000000/html-5--v1.png) ![CSS](https://img.icons8.com/color/48/000000/css3.png) ![Jest](https://live.staticflickr.com/65535/51227349411_3796436610_s.jpg) ![Firebase](https://img.icons8.com/color/48/000000/firebase.png")
+![javascript](https://img.icons8.com/color/48/000000/javascript.png) ![HTML](https://img.icons8.com/color/48/000000/html-5--v1.png) ![CSS](https://img.icons8.com/color/48/000000/css3.png) ![Jest](https://live.staticflickr.com/65535/51227349411_3796436610_s.jpg) ![Firebase](https://img.icons8.com/color/48/000000/firebase.png)
 # Creando una Red Social - Dogbook
 
 ## Índice
